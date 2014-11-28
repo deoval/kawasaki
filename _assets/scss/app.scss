@@ -1,0 +1,556 @@
+
+
+@import "settings";
+@import "foundation";
+@import "sprites";
+@import "bxslider";
+
+$corsite : #f8f8f0;
+$hover : #60b0e1;
+
+@mixin transition($transition-property, $transition-time, $method) {
+    -webkit-transition: $transition-property $transition-time $method;
+    -moz-transition: $transition-property $transition-time $method;
+    -ms-transition: $transition-property $transition-time $method;
+    -o-transition: $transition-property $transition-time $method;
+    transition: $transition-property $transition-time $method;
+}
+
+@mixin clearfix {
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+
+.right,.left{
+    float: none!important; 
+}
+
+div.clear{
+    clear:both;
+    @include clearfix();
+}
+
+@font-face {
+    font-family: 'agency_fb';
+    src: url('../fonts/agency_fb.eot');
+    src: url('../fonts/agency_fb.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/agency_fb.woff2') format('woff2'),
+        url('../fonts/agency_fb.woff') format('woff'),
+        url('../fonts/agency_fb.ttf') format('truetype'),
+        url('../fonts/agency_fb.svg#agency_fb') format('svg');
+    font-weight: normal;
+    font-style: normal; 
+}
+
+html::before{content:"agency_fb";position:fixed;top:-5rem;font: 0/0 'agency_fb'}
+.wrapper{
+    width: 95%;
+    max-width: 1215px;
+    margin: 0 auto;
+    position: relative;
+    @include clearfix();
+}
+
+
+body{
+    font-family: "agency_fb";
+    background-color: $corsite;
+}
+
+// HEADER
+
+nav.top-bar {
+    background-color: $corsite;
+    height: 234px;
+    text-align:left;
+}
+
+section.top-bar-section {
+    display: inline-block; 
+    margin-left: 70px;
+    height: 175px;
+    width: 100%;
+}
+
+
+.top-bar-section .logo{
+    width: 200px;
+    height: 140px;
+    display: block;
+    position: relative;
+    float: left;
+    background: url('../img/logo.png') no-repeat center top;
+    margin-top: 20px;
+    background-size:contain!important;
+}
+
+.top-bar-section .loginArea{
+    width: 610px;
+    height: 105px;
+    float:right;
+    margin: 16px 90px 0 0;
+}
+.loginArea p,
+.loginArea input,
+.loginArea span{
+    float: left;
+}
+
+.loginArea p{
+    margin: 5px 15px;
+    font-size: 20px;
+    color: #a4a39e; 
+    letter-spacing: 1px;
+}
+
+.loginArea input:hover{
+    border-color: $hover;
+}
+.loginArea input{
+    width: 175px;
+    height: 33px;
+    margin: 5px 10px;
+    border-color: $corsite;
+}
+
+.loginArea p.cadastre{
+    font-size: 16px;
+    margin-left:3px;
+    margin-right:3px;
+}
+
+.loginArea a.cadastre{
+    font-size: 16px;
+    color: $hover;
+    margin-left:3px;
+    margin-right:3px;
+}
+
+.loginArea a.cadastre:hover{
+    color: #222;
+}
+
+
+
+.loginArea input[type="submit"]:hover{
+    background-color: $hover;
+}
+.loginArea input[type="submit"]{
+    width: 40px;
+    height: 33px;
+    background-color: #222;
+    color: #fff;
+    border: 0;
+    cursor:pointer;
+}
+
+.loginArea span{
+    margin: 0 0;
+    display: block;
+    width: 39px;
+    height: 39px;
+}
+
+.loginArea span.tel{
+    background: url(../img/tel.jpg) no-repeat center top;
+}
+
+.loginArea span.mail{
+    background: url(../img/mail.jpg) no-repeat center top;
+}
+
+
+.loginArea a:hover{
+    color: $hover;
+}
+.loginArea a{
+    font-size: 20px;
+    text-decoration: none;
+    color: #a4a39e;
+    line-height: inherit;
+    margin-left: 15px;
+}
+
+section.bottom-bar-section {
+    display: inline-block; 
+    margin-left: 32px;
+}
+
+.bottom-bar-section ul li{
+	float: left;
+}
+
+.bottom-bar-section ul li:not(.has-form) a{
+    background-color: #f8f8f0;
+    font-family: 'agency_fb';
+    font-size: 23px;
+    color: #a4a39e;
+    padding: 0px 23px;
+    @include transition(all, 0.1s, linear);
+    letter-spacing: 1px;
+}
+
+.bottom-bar-section li:not(.has-form) a:hover,
+.bottom-bar-section li:not(.has-form) a.ativo{
+    color:$hover;
+}
+
+.bottom-bar-section li.logo{
+    background-color: transparent;
+}
+
+.wrap{
+    @include clearfix;
+}
+
+// BANNER
+
+.bannerHome{
+  width: 100%;
+  position: relative;
+  float: left;
+  text-align: center;
+}
+
+.bannerHome img{
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+
+.conteudo{
+    background-color: #fff;
+    position: relative;
+    margin-top: -90px;
+    min-height: 220px;
+    padding-bottom: 20px;
+}
+
+.conteudo h2{
+    font-size: 33px;
+    color: #222;
+    line-height: 1.4em;
+    text-align: center;
+    font-family: T;
+    clear: both;
+}
+.conteudo p{
+    margin: 5px 15px;
+    font-size: 20px;
+    color: #a4a39e; 
+    letter-spacing: 1px;
+}
+
+.conteudo hr{
+    border: solid #cdcdcd;
+    border-width: 3px 0 0;
+    clear: both;
+    margin: 1.25rem 0 1.1875rem;
+    height: 0;
+    position: absolute;
+    top: 20px;
+    width: 100%;
+}
+
+.conteudo p.header{
+    width: 370px;
+    font-size: 25px;
+    height: 40px;
+    text-align: center;
+    background-color: #fff;
+    float: left;
+    left: 50%;
+    margin: 20px 0 10px -185px;
+    position: relative;
+
+}
+
+.conteudo .noticias{
+    height: 310px;
+    width: 100%;
+    background-size: cover !important;
+    position: relative;
+    margin: 20px 0;
+}
+
+.noticias .inner{
+    background-color: rgba(0,0,0,0.7);
+    width: 700px;
+    height: 100%;
+    position: relative; 
+    float: right;
+    padding: 0 40px;
+}
+
+.inner h3{
+    font-size: 25px; 
+    color: #fff;
+    text-align: left;
+    line-height: 1em;
+    margin-top: 40px; 
+}
+
+.inner p{
+    font-size: 20px;
+    color: #fff;
+    text-align: left;
+    margin: 20px 0;
+}
+
+.inner a:hover{
+    background-color: $hover;
+}
+.inner a{
+    font-size: 18px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #222;
+    line-height: inherit;
+    padding: 5px 9px;
+    float:right;
+    display:block;
+}
+
+.inner .bxslider{
+    width: 960px;
+    position: relative;
+    margin: 0 auto;
+}
+
+
+.contato{
+   width: 100%;
+   height: 570px;
+   background-color: #2a2a2a;
+   clear: both;
+   position: relative;
+   margin-top: 160px;
+   padding: 96px 70px 10px;
+}
+
+div#map-canvas{
+    width: 100%;
+    height: 300px;
+    position: relative;
+    transform: translateZ(0px);
+    top: 40px;
+}
+.contato > div.mapa{
+    width: 50%;
+}
+.contato > div{
+    float:left;
+    width: 25%;
+}
+
+.contato hr{
+    border: solid #343434;
+    border-width: 2px 0 0;
+    clear: both;
+    margin: 1.25rem 0 1.1875rem;
+    height: 0;
+    width: 88%;
+}
+
+.contato span.separator{
+    width: 241px;
+    height: 12px;
+    background: url(../img/separator.jpg) no-repeat center top;
+    clear: both;
+    position: relative;
+    display: block;
+    margin-bottom: 10px;
+} 
+
+.contato h4{
+    color: #fff;
+    font-size: 20px;
+    line-height: 1em;
+    text-align: left;
+    margin-top: 15px
+}
+
+.contato p{
+    font-size: 18px;
+    color: #9d9d9d;
+    margin-left: 2px;
+    margin-bottom: 3px;
+    margin-top: 0;
+}
+
+.contato input:focus,
+.contato textarea:focus{
+    background: #fafafa;
+    border-color: #999999;
+}
+.contato input.erro{
+    border-color: rgb(230, 116, 116);
+}
+
+.contato input,
+.contato textarea{
+    width: 240px;
+    height: 40px;
+    font-size: 16px;
+    background-color: #3e3e3e;
+    color: #9d9d9d;
+    float:left;
+    border: 1px solid #3e3e3e;
+}
+.contato textarea{
+    height: 80px;
+}
+
+.contato form{
+    margin-top: 30px;
+}
+
+.contato input[type="submit"]:hover{
+    color: #3e3e3e;
+    background: #fafafa;
+    border-color: #999999;
+    outline: none;
+}
+.contato input[type="submit"]{
+    font-size: 15px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #000;
+    line-height: inherit;
+    padding: 5px 9px;
+    float:left;
+    display:block;
+    width: 95px;
+    height: 30px;
+    cursor:pointer;
+}
+
+
+.buscaHeader{
+    text-align: center;
+    width: 30%;
+    float: left;
+    img{
+        max-width: 50%;
+        margin: 10px auto;
+        float: none;
+    }
+    h2{
+        font-size: 21px;
+        line-height: 1.3em;
+        color: #222;
+        font-family: 'agency_fb';
+        text-align: center;
+
+        &.hide{
+            display: none;
+        }
+    }
+
+}
+
+
+.buscaMotoboy{
+    float: left!important;
+    width: 30%;
+    border-sizing:border-box;
+    padding: 30px 0;
+
+    h2{
+        font-size: 23px;
+        line-height: 1.3em;
+        color: #222;
+        font-family: 'agency_fb';
+        text-align: center;
+    }
+
+    input{
+        width: 45%;
+        margin: 3px 1% 0 3%;
+        float:left;
+        transition: all .25s;
+        
+        &.obs{
+            width: 94%;
+            height: 50px;
+        }
+    
+        &[type="submit"]{
+            width: 150px;
+            height: 32px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            position: relative;
+            left: 50%;
+            margin-left: -75px;
+            cursor:pointer;
+            transition: all .25s;
+            &:hover{
+                background-color: $hover;
+                color: #fff;
+            }
+        }
+
+        &:hover{
+            border-color: $hover;
+        }
+    }
+
+    form > div{
+        margin-bottom: 25px;
+        @include clearfix();
+    }
+}
+
+.resultadoMotoboy{
+    float: left!important;
+    width: 30%;
+    border-sizing:border-box;
+    padding: 30px 1% 0;
+    h2{
+        font-size: 23px;
+        line-height: 1.3em;
+        color: #222;
+        font-family: 'agency_fb';
+        text-align: center;
+    }
+    table{
+        font-size: 1.1rem;
+    }
+}
+
+
+#cad-cliente table,
+#cad-motoboy table {
+    background: #FFFFFF;
+    margin-bottom: 1.25rem;
+    table-layout: auto;
+    border: 0;
+
+}
+
+table tr.even, table tr.alt, table tr:nth-of-type(even){
+    background-color: #fff;
+}
+
+table{
+    input[type="submit"]{
+        width: 150px;
+        height: 32px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        position: relative;
+        left: 50%;
+        margin-left: -75px;
+        cursor:pointer;
+        transition: all .25s;
+        &:hover{
+            background-color: #222;
+            color: #fff;
+        }
+    }
+}

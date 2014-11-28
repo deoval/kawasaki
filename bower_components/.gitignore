@@ -1,0 +1,3 @@
+*.DS_Store
+_assets/css/*
+node_modules/* 

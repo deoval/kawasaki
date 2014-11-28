@@ -1,0 +1,1 @@
+<div id="map_canvas" style="width:70%; height:100%; float:right;" ></div>
