@@ -119,6 +119,8 @@ function __autoload($classe) {
         require_once(CLASSE_PATH . "util/" . $classe . ".php");
     else if (file_exists(CLASSE_PATH . "phpmailer/" . $classe . ".php"))
         require_once(CLASSE_PATH . "phpmailer/" . $classe . ".php");
+	else if (file_exists(CLASSE_PATH . "entidade/" . $classe . ".php"))
+        require_once(CLASSE_PATH . "entidade/" . $classe . ".php");
     else {
         $erro = 0;
 

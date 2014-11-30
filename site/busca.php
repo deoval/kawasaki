@@ -2,6 +2,7 @@
 <?php
 $op = isset($urlGet['op']) && intval($urlGet['op']) > 0 ? (int) $urlGet['op'] : 0;
 $op2 = isset($_POST['op']) && intval($_POST['op']) > 0 ? (int) $_POST['op'] : 0;
+$cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
 ?>
 <html class="no-js" lang="en">
     <head>
@@ -36,31 +37,106 @@ $op2 = isset($_POST['op']) && intval($_POST['op']) > 0 ? (int) $_POST['op'] : 0;
 		
 		
        <?php
-       if (is_array($_POST) && count($_POST)) {
+			    if ($cmd == 'incluir_solicitacao') {
+
+			
+			
+			$objsolicitacao_end_busca = new SqlSolicitacao_endereco((int) $_POST['end_solicita_busca']['id_solicitacao_endereco']);
+			$_POST['end_solicita_busca']['id_solicitacao_endereco'] = (int) $objsolicitacao_end_busca->id_solicitacao_endereco;
+			$objsolicitacao_end_busca->Prepare($_POST['end_solicita_busca']);
+			if (!$_POST['end_solicita_busca']['id_solicitacao_endereco'])
+				$objsolicitacao_end_busca->Cadastra();
+		    else
+				$objsolicitacao_end_busca->Edita();
+				
+				
+			$objsolicitacao_end_entrega = new SqlSolicitacao_endereco((int) $_POST['end_solicita_entrega']['id_solicitacao_endereco']);
+			$_POST['end_solicita_entrega']['id_solicitacao_endereco'] = (int) $objsolicitacao_end_entrega->id_solicitacao_endereco;
+			$objsolicitacao_end_entrega->Prepare($_POST['end_solicita_entrega']);
+			if (!$_POST['end_solicita_entrega']['id_solicitacao_endereco'])
+				$objsolicitacao_end_entrega->Cadastra();
+		    else
+				$objsolicitacao_end_entrega->Edita();					
+		
+
+			$objsolicitacao = new SqlSolicitacao((int) $_POST['solicitacao']['id_solicitacao']);
+			$_POST['solicitacao']['id_solicitacao'] = (int) $objsolicitacao->id_solicitacao;
+			$objsolicitacao->Prepare($_POST['solicitacao']);
+			if (!$_POST['solicitacao']['id_solicitacao'])
+				$objsolicitacao->Cadastra();
+		    else
+				$objsolicitacao->Edita();				
+						
+			
+		}
+		
+		
+		
+       if ($cmd=="consultar") {
            $geoA = geocode($_POST['pontoa']['endereco'] . ' ' . $_POST['pontoa']['numero'] . ' ' . $_POST['pontoa']['bairro'] . ' ' . $_POST['pontoa']['cidade']);
            $geoB = geocode($_POST['pontob']['endereco'] . ' ' . $_POST['pontob']['numero'] . ' ' . $_POST['pontob']['bairro'] . ' ' . $_POST['pontob']['cidade']);
            $distancia = distancia($_POST['pontoa']['endereco'] . ' ' . $_POST['pontoa']['numero'] . ' ' . $_POST['pontoa']['bairro'] . ' ' . $_POST['pontoa']['cidade'], $_POST['pontob']['endereco'] . ' ' . $_POST['pontob']['numero'] . ' ' . $_POST['pontob']['bairro'] . ' ' . $_POST['pontob']['cidade']);
+		   
+		   $objconfig = new Config();
+		   $valor_km = (float)$objconfig->_lista(array(  item =>  "item = 'valor_quilometragem'"),"","")[0]['value'];
+		   
+		   $distancia_minima = (float)$objconfig->_lista(array(  item =>  "item = 'distancia_minima'"),"","")[0]['value'];
+
+		   $distancia_sem_km = str_replace(" km", "", $distancia['distancia']);
+		   $distancia_sem_km = (float)str_replace(",", ".", $distancia_sem_km);
+		   
+		   $objcategoria = new Categoria();
+		   $tipo_material = $objcategoria->_lista("id_categoria = 1","","")[0]['nome'];
+		   $custo_adicional = (float)$objcategoria->_lista("id_categoria = 1","","")[0]['custo_adicional'];
+		   
+		   if ( $distancia_minima > $distancia_sem_km){
+				$preco_servico = $distancia_minima * $valor_km;
+		   }
+		   else{
+				$preco_servico = (int)$distancia * (int)$valor_km;
+		   }
+		   $valor_total = $preco_servico + $custo_adicional;
+		   
         ?>
-    
-        <div class="resultadoMotoboy">
+		 <div class="resultadoMotoboy">
+        
             <h2>Resultado da Busca</h2>
             <table class="content" style="width: 100%;">
-                <?php
-                if (is_array($distancia)) {
-                    ?>
-                    <tr>
-                        <td colspan="2">
-                            Distância aproximada: <?php echo $distancia['distancia'] ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            Tempo aproximado: <?php echo $distancia['tempo'] ?>
-                        </td>
-                    </tr>
-                    <?php
-                }
-                ?>
+				<form  name="fSolicitacao" id="fSolicitacao" method="post">
+				
+				<input type="hidden" name="cmd" id="comd" value="incluir_solicitacao"/>
+				
+				<input type="hidden" name="end_solicita_busca[lat]" id="lat" value="232"/>
+				<input type="hidden" name="end_solicita_busca[lng]" id="lng" value="123"/>
+				<input type="hidden" name="end_solicita_busca[cep]" id="cep" value="14266829765"/>
+				<input type="hidden" name="end_solicita_busca[endereco]" id="endereco" value="rewrwefw fefef"/>
+				<input type="hidden" name="end_solicita_busca[numero]" id="numero" value="2"/>
+				<input type="hidden" name="end_solicita_busca[complemento]" id="complemento" value="ap dd"/>
+				<input type="hidden" name="end_solicita_busca[bairro]" id="bairro" value="Centro"/>
+				<input type="hidden" name="end_solicita_busca[cidade]" id="cidade" value="Rio de Janeiro"/>
+				<input type="hidden" name="end_solicita_busca[observacao]" id="observacao" value="obs teste busca"/>
+				<input type="hidden" name="end_solicita_busca[responsavel]" id="responsavel" value=" testante busca"/>
+				
+				<input type="hidden" name="end_solicita_entrega[lat]" id="lat" value="533343"/>
+				<input type="hidden" name="end_solicita_entrega[lng]" id="lng" value="5656565"/>
+				<input type="hidden" name="end_solicita_entrega[cep]" id="cep" value="20230024"/>
+				<input type="hidden" name="end_solicita_entrega[endereco]" id="endereco" value="fsdfdsfasd"/>
+				<input type="hidden" name="end_solicita_entrega[numero]" id="numero" value="1"/>
+				<input type="hidden" name="end_solicita_entrega[complemento]" id="complemento" value="1"/>
+				<input type="hidden" name="end_solicita_entrega[bairro]" id="bairro" value="Centro"/>
+				<input type="hidden" name="end_solicita_entrega[cidade]" id="cidade" value="Rio"/>
+				<input type="hidden" name="end_solicita_entrega[observacao]" id="observacao" value="obs teste entrega"/>
+				<input type="hidden" name="end_solicita_entrega[responsavel]" id="responsavel" value="testante entrega"/>
+				
+				<input type="hidden" name="solicitacao[id_cliente]" id="id_cliente" value="6"/>
+				<input type="hidden" name="solicitacao[id_motoboy]" id="id_motoboy" value="2"/>
+				<input type="hidden" name="solicitacao[id_solicitacao_endereco_busca]" id="id_solicitacao_endereco_busca" value="1"/>
+				<input type="hidden" name="solicitacao[id_solicitacao_endereco_entrega]" id="id_solicitacao_endereco_entrega" value="2"/>
+				<input type="hidden" name="solicitacao[id_categoria]" id="id_categoria" value="1"/>
+				<input type="hidden" name="solicitacao[data]" id="data" value="30-11-2014 00:00:00"/>
+				<input type="hidden" name="solicitacao[valor]" id="valor" value="98"/>
+				<input type="hidden" name="solicitacao[ativo]" id="ativo" value="1"/>
+				
                 <tr>
                     <td colspan="2">
                         Motoboy's
@@ -83,19 +159,64 @@ $op2 = isset($_POST['op']) && intval($_POST['op']) > 0 ? (int) $_POST['op'] : 0;
                     while ($dado = $db->Fetch()) {
                         ?>
                         <tr>
-                            <td colspan="2">
+                            <td>
                                 Motoboy: <?php echo $dado->nome?><br/>
                                 Distancia aproximada: <?php echo ($dado->DISTANCIA >= 1) ? number_format($dado->DISTANCIA, 1, ',', '.') . ' km' : floor($dado->DISTANCIA * 1000) . ' m';?>
                             </td>
+							<td>
+								<input type="submit" name="btnSolicitar" class="animate" id="btnSolicitar" value="Solicitar"/>
+							</td>
                         </tr>
                         <?php
                     }
                 }
                 ?>
+				<form>
+			</table>
+		
+			<h2>Orçamento</h2>
+            <table class="content" style="width: 100%;">
+                <tr>
+					<td colspan="2">
+                            Distância aproximada: <?php echo $distancia['distancia'] ?>
+					</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        Tempo aproximado: <?php echo $distancia['tempo'] ?>
+                    </td>
+                </tr>
+				<tr  colspan="2">  
+					<td>
+						Tipo de material: <?php echo $tipo_material ?>
+					</td>
+				</tr>
+				<tr  colspan="2">  
+					<td>
+						Preço do serviço: R$ <?php echo $preco_servico ?>
+
+					</td>
+				</tr>
+				<tr  colspan="2">  
+					<td>					
+					Custo adicional: R$  <?php echo $custo_adicional ?>
+					</td>
+				</tr>
+				<tr  colspan="2">  
+					<td>					
+					Valor total: R$  <?php echo $valor_total ?>
+					</td>
+				</tr>
+                    
             </table>
-        </div>
+        </div>	
+				
         <?php
            }
+		   
+		      
+       else{
+
         ?>
         <div class="buscaMotoboy">
             <form action="" name="fBusca" id="fBusca" method="post">
@@ -119,11 +240,14 @@ $op2 = isset($_POST['op']) && intval($_POST['op']) > 0 ? (int) $_POST['op'] : 0;
                     <input type="text" name="pontob[responsavel]" placeholder="Responsavel:" value="<?php echo (is_array($_POST['pontob'])) ? $_POST['pontob']['responsavel'] : '' ?>"/>
                     <input type="text" class="obs" name="pontob[observacao]" placeholder="Obs:" value="<?php echo (is_array($_POST['pontob'])) ? $_POST['pontob']['observacao'] : '' ?>"/>
                 </div>
-                    <input type="hidden" name="cmd" id="comd" value="buscar"/>
+                    <input type="hidden" name="cmd" id="comd" value="consultar"/>
 					<input type="hidden" name="op" id="opcao" value="1"/>
-                    <input type="submit" name="btnBuscar" class="animate" id="btnBuscar" value="Solicitar"/>
+                    <input type="submit" name="btnConsultar" class="animate" id="btnConsultar" value="Consultar"/>
             </form>
         </div>
+		<?php
+			}
+        ?>
     </body>
     <script src="<?php echo GLOBAL_PATH; ?>bower_components/jquery/dist/jquery.min.js"></script>
     <script src="<?php echo GLOBAL_PATH; ?>bower_components/foundation/js/foundation.min.js"></script>
