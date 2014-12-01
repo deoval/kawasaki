@@ -264,9 +264,9 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
                   <input type="text" name="pontoa[cep]" data-mask="cep" data-tipo="pontoa" placeholder="CEP:" value="<?php echo (is_array($geoA)) ? $geoA['cep'] : '' ?>"/>
                   <input type="text" name="pontoa[endereco]" id="pontoaEndereco" placeholder="Endereço:" value="<?php echo (is_array($geoA)) ? $geoA['endereco'] : '' ?>"/>
                   <input type="text" name="pontoa[numero]" data-mask="numero" placeholder="Número:" value="<?php echo (is_array($geoA)) ? $geoA['numero'] : '' ?>"/>
-                  <input type="text" name="pontoa[bairro]" id="pontoaBairro" placeholder="Bairro" value="<?php echo (is_array($geoA)) ? $geoA['bairro'] : '' ?>"/>
-                  <input type="text" name="pontoa[responsavel]" placeholder="Responsavel:" value="<?php echo (is_array($_POST['pontoa'])) ? $_POST['pontoa']['responsavel'] : '' ?>"/>
+                  <input type="text" name="pontoa[bairro]" id="pontoaBairro" placeholder="Bairro" value="<?php echo (is_array($geoA)) ? $geoA['bairro'] : '' ?>"/>                  
                   <input type="text" name="pontoa[cidade]" id="pontoaCidade" placeholder="Cidade" value="<?php echo (is_array($geoA)) ? $geoA['cidade'] : '' ?>"/>
+				  <input type="text" name="pontoa[responsavel]" placeholder="Responsavel:" value="<?php echo (is_array($_POST['pontoa'])) ? $_POST['pontoa']['responsavel'] : '' ?>"/>
                   <input type="text" class="obs" name="pontoa[observacao]" placeholder="Obs:" value="<?php echo (is_array($_POST['pontoa'])) ? $_POST['pontoa']['observacao'] : '' ?>"/>
                 </div>
                 <div>
