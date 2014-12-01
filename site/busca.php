@@ -44,8 +44,11 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
 			$objsolicitacao_end_busca = new SqlSolicitacao_endereco((int) $_POST['end_solicita_busca']['id_solicitacao_endereco']);
 			$_POST['end_solicita_busca']['id_solicitacao_endereco'] = (int) $objsolicitacao_end_busca->id_solicitacao_endereco;
 			$objsolicitacao_end_busca->Prepare($_POST['end_solicita_busca']);
-			if (!$_POST['end_solicita_busca']['id_solicitacao_endereco'])
+			
+			if (!$_POST['end_solicita_busca']['id_solicitacao_endereco']){
 				$objsolicitacao_end_busca->Cadastra();
+			
+			}
 		    else
 				$objsolicitacao_end_busca->Edita();
 				
@@ -55,12 +58,15 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
 			$objsolicitacao_end_entrega->Prepare($_POST['end_solicita_entrega']);
 			if (!$_POST['end_solicita_entrega']['id_solicitacao_endereco'])
 				$objsolicitacao_end_entrega->Cadastra();
+				
 		    else
 				$objsolicitacao_end_entrega->Edita();					
 		
 
 			$objsolicitacao = new SqlSolicitacao((int) $_POST['solicitacao']['id_solicitacao']);
 			$_POST['solicitacao']['id_solicitacao'] = (int) $objsolicitacao->id_solicitacao;
+			$_POST['solicitacao']['id_solicitacao_endereco_busca']=(int) $objsolicitacao_end_busca->id_solicitacao_endereco;
+			$_POST['solicitacao']['id_solicitacao_endereco_entrega']=(int) $objsolicitacao_end_entrega->id_solicitacao_endereco;
 			$objsolicitacao->Prepare($_POST['solicitacao']);
 			if (!$_POST['solicitacao']['id_solicitacao'])
 				$objsolicitacao->Cadastra();
@@ -76,6 +82,39 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
            $geoA = geocode($_POST['pontoa']['endereco'] . ' ' . $_POST['pontoa']['numero'] . ' ' . $_POST['pontoa']['bairro'] . ' ' . $_POST['pontoa']['cidade']);
            $geoB = geocode($_POST['pontob']['endereco'] . ' ' . $_POST['pontob']['numero'] . ' ' . $_POST['pontob']['bairro'] . ' ' . $_POST['pontob']['cidade']);
            $distancia = distancia($_POST['pontoa']['endereco'] . ' ' . $_POST['pontoa']['numero'] . ' ' . $_POST['pontoa']['bairro'] . ' ' . $_POST['pontoa']['cidade'], $_POST['pontob']['endereco'] . ' ' . $_POST['pontob']['numero'] . ' ' . $_POST['pontob']['bairro'] . ' ' . $_POST['pontob']['cidade']);
+		   
+
+		   		$busca_lat=$geoA['lat'];
+				$busca_lng=$geoA['lng'];
+				$busca_cep=$_POST['pontoa']['cep'];
+				$busca_endereco=$_POST['pontoa']['endereco'];
+				$busca_numero=$_POST['pontoa']['numero'];
+				$busca_complemento=$_POST['pontoa']['complemento'];
+				$busca_bairro=$_POST['pontoa']['bairro'];
+				$busca_cidade=$_POST['pontoa']['cidade'];
+				$busca_observacao=$_POST['pontoa']['observacao'];
+				$busca_responsavel=$_POST['pontoa']['responsavel'];
+				
+				$entrega_lat=$geoB['lat'];
+				$entrega_lng=$geoB['lng'];
+				$entrega_cep=$_POST['pontob']['cep'];
+				$entrega_endereco=$_POST['pontob']['endereco'];
+				$entrega_numero=$_POST['pontob']['numero'];
+				$entrega_complemento=$_POST['pontob']['complemento'];
+				$entrega_bairro=$_POST['pontob']['bairro'];
+				$entrega_cidade=$_POST['pontob']['cidade'];
+				$entrega_observacao=$_POST['pontob']['observacao'];
+				$entrega_responsavel=$_POST['pontob']['responsavel'];
+				
+				$solicitacao_id_cliente;
+				$solicitacao_id_motoboy;
+				$solicitacao_id_solicitacao_endereco_busca;
+				$solicitacao_id_solicitacao_endereco_entrega;
+				$solicitacao_id_categoria;
+				$solicitacao_data;
+				$solicitacao_valor;
+				$solicitacao_ativo;
+		   
 		   
 		   $objconfig = new Config();
 		   $valor_km = (float)$objconfig->_lista(array(  item =>  "item = 'valor_quilometragem'"),"","")[0]['value'];
@@ -106,35 +145,35 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
 				
 				<input type="hidden" name="cmd" id="comd" value="incluir_solicitacao"/>
 				
-				<input type="hidden" name="end_solicita_busca[lat]" id="lat" value="232"/>
-				<input type="hidden" name="end_solicita_busca[lng]" id="lng" value="123"/>
-				<input type="hidden" name="end_solicita_busca[cep]" id="cep" value="14266829765"/>
-				<input type="hidden" name="end_solicita_busca[endereco]" id="endereco" value="rewrwefw fefef"/>
-				<input type="hidden" name="end_solicita_busca[numero]" id="numero" value="2"/>
-				<input type="hidden" name="end_solicita_busca[complemento]" id="complemento" value="ap dd"/>
-				<input type="hidden" name="end_solicita_busca[bairro]" id="bairro" value="Centro"/>
-				<input type="hidden" name="end_solicita_busca[cidade]" id="cidade" value="Rio de Janeiro"/>
-				<input type="hidden" name="end_solicita_busca[observacao]" id="observacao" value="obs teste busca"/>
-				<input type="hidden" name="end_solicita_busca[responsavel]" id="responsavel" value=" testante busca"/>
+				<input type="hidden" name="end_solicita_busca[lat]" id="lat" value="<?php echo $busca_lat ?>"/>
+				<input type="hidden" name="end_solicita_busca[lng]" id="lng" value="<?php echo $busca_lng ?>"/>
+				<input type="hidden" name="end_solicita_busca[cep]" id="cep" value="<?php echo $busca_cep ?>"/>
+				<input type="hidden" name="end_solicita_busca[endereco]" id="endereco" value="<?php echo $busca_endereco ?>"/>
+				<input type="hidden" name="end_solicita_busca[numero]" id="numero" value="<?php echo $busca_numero ?>"/>
+				<input type="hidden" name="end_solicita_busca[complemento]" id="complemento" value="<?php echo $busca_complemento ?>"/>
+				<input type="hidden" name="end_solicita_busca[bairro]" id="bairro" value="<?php echo $busca_cidade ?>"/>
+				<input type="hidden" name="end_solicita_busca[cidade]" id="cidade" value="<?php echo $busca_cidade ?>"/>
+				<input type="hidden" name="end_solicita_busca[observacao]" id="observacao" value="<?php echo $busca_observacao ?>"/>
+				<input type="hidden" name="end_solicita_busca[responsavel]" id="responsavel" value="<?php echo $busca_responsavel ?>"/>
 				
-				<input type="hidden" name="end_solicita_entrega[lat]" id="lat" value="533343"/>
-				<input type="hidden" name="end_solicita_entrega[lng]" id="lng" value="5656565"/>
-				<input type="hidden" name="end_solicita_entrega[cep]" id="cep" value="20230024"/>
-				<input type="hidden" name="end_solicita_entrega[endereco]" id="endereco" value="fsdfdsfasd"/>
-				<input type="hidden" name="end_solicita_entrega[numero]" id="numero" value="1"/>
-				<input type="hidden" name="end_solicita_entrega[complemento]" id="complemento" value="1"/>
-				<input type="hidden" name="end_solicita_entrega[bairro]" id="bairro" value="Centro"/>
-				<input type="hidden" name="end_solicita_entrega[cidade]" id="cidade" value="Rio"/>
-				<input type="hidden" name="end_solicita_entrega[observacao]" id="observacao" value="obs teste entrega"/>
-				<input type="hidden" name="end_solicita_entrega[responsavel]" id="responsavel" value="testante entrega"/>
+				<input type="hidden" name="end_solicita_entrega[lat]" id="lat" value="<?php echo $entrega_lat ?>"/>
+				<input type="hidden" name="end_solicita_entrega[lng]" id="lng" value="<?php echo $entrega_lng ?>"/>
+				<input type="hidden" name="end_solicita_entrega[cep]" id="cep" value="<?php echo $entrega_cep ?>"/>
+				<input type="hidden" name="end_solicita_entrega[endereco]" id="endereco" value="<?php echo $entrega_endereco ?>"/>
+				<input type="hidden" name="end_solicita_entrega[numero]" id="numero" value="<?php echo $entrega_numero ?>"/>
+				<input type="hidden" name="end_solicita_entrega[complemento]" id="complemento" value="<?php echo $entrega_complemento ?>"/>
+				<input type="hidden" name="end_solicita_entrega[bairro]" id="bairro" value="<?php echo $entrega_bairro ?>"/>
+				<input type="hidden" name="end_solicita_entrega[cidade]" id="cidade" value="<?php echo $entrega_cidade ?>"/>
+				<input type="hidden" name="end_solicita_entrega[observacao]" id="observacao" value="<?php echo $entrega_observacao ?>"/>
+				<input type="hidden" name="end_solicita_entrega[responsavel]" id="responsavel" value="<?php echo $entrega_responsavel ?>"/>
 				
 				<input type="hidden" name="solicitacao[id_cliente]" id="id_cliente" value="6"/>
 				<input type="hidden" name="solicitacao[id_motoboy]" id="id_motoboy" value="2"/>
-				<input type="hidden" name="solicitacao[id_solicitacao_endereco_busca]" id="id_solicitacao_endereco_busca" value="1"/>
-				<input type="hidden" name="solicitacao[id_solicitacao_endereco_entrega]" id="id_solicitacao_endereco_entrega" value="2"/>
+				<input type="hidden" name="solicitacao[id_solicitacao_endereco_busca]" id="id_solicitacao_endereco_busca" value=""/>
+				<input type="hidden" name="solicitacao[id_solicitacao_endereco_entrega]" id="id_solicitacao_endereco_entrega" value=""/>
 				<input type="hidden" name="solicitacao[id_categoria]" id="id_categoria" value="1"/>
 				<input type="hidden" name="solicitacao[data]" id="data" value="30-11-2014 00:00:00"/>
-				<input type="hidden" name="solicitacao[valor]" id="valor" value="98"/>
+				<input type="hidden" name="solicitacao[valor]" id="valor" value="<?php echo $valor_total ?>"/>
 				<input type="hidden" name="solicitacao[ativo]" id="ativo" value="1"/>
 				
                 <tr>
