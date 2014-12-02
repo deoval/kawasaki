@@ -246,6 +246,7 @@ class DB {
      * @return resource
      */
     public function Query($sql) {
+        
         if (!$this->result = mysql_query($sql, $this->conn)) {
             return false;
         } else {
@@ -334,9 +335,10 @@ class DB {
     }
 
     public function Select() {
+
         $sql = "SELECT " . $this->getColuns() . " FROM " . $this->getFrom() . " " . $this->getJoin();
         if ($this->getWhere() != "")
-            $sql .= " WHERE 1 " . $this->getWhere();
+            $sql .= " WHERE " . $this->getWhere();
 
         if ($this->getGroup() != "")
             $sql .= " GROUP BY " . $this->getGroup();
