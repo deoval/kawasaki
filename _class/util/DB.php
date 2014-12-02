@@ -338,7 +338,7 @@ class DB {
 
         $sql = "SELECT " . $this->getColuns() . " FROM " . $this->getFrom() . " " . $this->getJoin();
         if ($this->getWhere() != "")
-            $sql .= " WHERE " . $this->getWhere();
+            $sql .= " WHERE 1 " . $this->getWhere();
 
         if ($this->getGroup() != "")
             $sql .= " GROUP BY " . $this->getGroup();

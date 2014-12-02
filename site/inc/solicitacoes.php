@@ -3,7 +3,7 @@
 $db = new DB();
 $db->setColuns("s.id_solicitacao, s.data, s.ativo, s.valor, c.nome as cliente, m.nome as motoboy, send.endereco, cat.nome as categoria" );
 $db->setFrom("solicitacao as s, cliente as c, motoboy as m, solicitacao_endereco as send, categoria as cat");
-$db->setWhere("s.id_cliente = c.id_cliente and s.id_motoboy = m.id_motoboy 
+$db->setWhere("and s.id_cliente = c.id_cliente and s.id_motoboy = m.id_motoboy 
 	and s.id_solicitacao_endereco_busca = send.id_solicitacao_endereco and s.id_categoria = cat.id_categoria");
 
 $db->Query($db->Select());
