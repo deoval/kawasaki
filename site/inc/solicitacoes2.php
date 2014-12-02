@@ -28,7 +28,7 @@ $db->Query($db->Select());
 <div id="solicitacoes" style="width:70%; height:100%; float:right; margin-top:60px" >
 
 <div class="table-responsive" style="width:90%; margin:auto">
-<h3>Solicitaçoes em aberto:</h3>
+<h3>Solicitações finalizadas:</h3>
 <table class="table-striped table-hover">
   		<thead>
    			 <tr>
@@ -60,6 +60,6 @@ $db->Query($db->Select());
 		</tbody>			
   	<?php }//Fechando while?>
 </table>
-<a href="?op=2" class="btn btn-default">Solicitações finalizadas</a>
+<a href="?op=1" class="btn btn-default">Solicitações em aberto</a>
 </div>
 </div>

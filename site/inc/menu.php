@@ -14,13 +14,13 @@
                 </li>
                 
                 <li class="dropdown" style="color: #CBA;margin-right: 30px;font-size: medium;">
-                    <a href="?op=2" >
+                    <a href="?op=3" >
                         Meus dados
                     </a>
                 </li>
                 
                 <li class="dropdown" style="color: #CBA;margin-right: 30px;font-size: medium;">
-                    <a href="?op=3" >
+                    <a href="?op=4" >
                         Fale Conosco
                     </a>
                 </li>

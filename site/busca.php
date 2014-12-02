@@ -20,7 +20,7 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
             <h2 <?php if(is_array($_POST)){ ?> class="hide" <?php }?>>Preencha os campos abaixo, com o local de busca e entrega da mercadoria, que cuidamos do resto.</h2>
         </div>
 		<?php
-        include('_assets/inc/menu.php');
+        include('site/inc/menu.php');
         ?>
 		
 		<?php
@@ -29,9 +29,13 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
 			else if ($op == 1)
 				include('inc/solicitacoes.php');
 			else if ($op == 2)
-				include('inc/meus-dados.php');
+				include('inc/solicitacoes2.php');
 			else if ($op == 3)
-				include('inc/fale-conosco.php');
+				include('inc/meus-dados.php');
+			else if ($op==4)
+				include('inc/fale-conosco.php');			
+			else
+				include('inc/map-canvas.php');
 			
 		?>
 		
