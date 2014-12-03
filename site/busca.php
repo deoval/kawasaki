@@ -1,5 +1,7 @@
 <!doctype html>
 <?php
+require "vendor/autoload.php";
+require "config/database.php";
 $op = isset($urlGet['op']) && intval($urlGet['op']) > 0 ? (int) $urlGet['op'] : 0;
 $op2 = isset($_POST['op']) && intval($_POST['op']) > 0 ? (int) $_POST['op'] : 0;
 $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
