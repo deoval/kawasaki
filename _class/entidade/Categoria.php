@@ -1,6 +1,11 @@
 <?php
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Categoria{
+class Categoria extends Eloquent{
+
+    protected $table = 'categoria';
+    public $timestamps = false;
+    protected $primaryKey = 'id_categoria';
 
     private $tabela = "categoria";
     private $id_categoria;
@@ -61,7 +66,7 @@ class Categoria{
         }
 
         //die($dbClass->Select());
-
+		
         return $dbClass->getArrayBySelect($dbClass->Select());
     }
     

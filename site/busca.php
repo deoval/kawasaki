@@ -14,6 +14,8 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
         <link rel="stylesheet" href="<?php echo GLOBAL_PATH; ?>_assets/css/main.css" />
 		<link rel="stylesheet" href="<?php echo GLOBAL_PATH; ?>_assets/css/bootstrap.css" />
         <script src="<?php echo GLOBAL_PATH; ?>bower_components/modernizr/modernizr.js"></script>
+		  
+		
     </head> 
     <body>
 
@@ -23,26 +25,7 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
         </div>
 		<?php
         include('site/inc/menu.php');
-        ?>
-		
-		<?php
-			if ($op == 0 || $op2 == 1)
-				include('inc/map-canvas.php');
-			else if ($op == 1)
-				include('inc/solicitacoes.php');
-			else if ($op == 2)
-				include('inc/solicitacoes2.php');
-			else if ($op == 3)
-				include('inc/meus-dados.php');
-			else if ($op==4)
-				include('inc/fale-conosco.php');			
-			else
-				include('inc/map-canvas.php');
-			
-		?>
-		
-		
-       <?php
+
 			    if ($cmd == 'incluir_solicitacao') {
 
 			
@@ -83,6 +66,21 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
 		}
 		
 		
+			if ($op == 0 || $op2 == 1)
+				include('inc/map-canvas.php');
+			else if ($op == 1)
+				include('inc/solicitacoes.php');
+			else if ($op == 2)
+				include('inc/solicitacoes2.php');
+			else if ($op == 3)
+				include('inc/meus-dados.php');
+			else if ($op==4)
+				include('inc/fale-conosco.php');			
+			else
+				include('inc/map-canvas.php');
+			
+
+		
 		
        if ($cmd=="consultar") {
            $geoA = geocode($_POST['pontoa']['endereco'] . ' ' . $_POST['pontoa']['numero'] . ' ' . $_POST['pontoa']['bairro'] . ' ' . $_POST['pontoa']['cidade']);
@@ -116,7 +114,7 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
 				$solicitacao_id_motoboy;
 				$solicitacao_id_solicitacao_endereco_busca;
 				$solicitacao_id_solicitacao_endereco_entrega;
-				$solicitacao_id_categoria;
+				$categ=$_POST['categ'];
 				$solicitacao_data;
 				$solicitacao_valor;
 				$solicitacao_ativo;
@@ -130,24 +128,29 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
 		   $distancia_sem_km = str_replace(" km", "", $distancia['distancia']);
 		   $distancia_sem_km = (float)str_replace(",", ".", $distancia_sem_km);
 		   
-		   $objcategoria = new Categoria();
-		   $tipo_material = $objcategoria->_lista("id_categoria = 1","","")[0]['nome'];
-		   $custo_adicional = (float)$objcategoria->_lista("id_categoria = 1","","")[0]['custo_adicional'];
+		   $objcategoria = Categoria::select('id_categoria','nome','custo_adicional')
+		   ->from('categoria')
+		   ->where('id_categoria','=',$categ)
+		   ->get();
+		   foreach ($objcategoria as $dado){
+				$tipo_material = $dado->nome;
+				$custo_adicional = $dado->custo_adicional;
+		   }
 		   
 		   if ( $distancia_minima > $distancia_sem_km){
 				$preco_servico = $distancia_minima * $valor_km;
 		   }
 		   else{
-				$preco_servico = (int)$distancia * (int)$valor_km;
+				$preco_servico = (int)$distancia_sem_km * (int)$valor_km;
 		   }
 		   $valor_total = $preco_servico + $custo_adicional;
-		   
+			
         ?>
 		 <div class="resultadoMotoboy">
         
             <h2>Resultado da Busca</h2>
             <table class="content" style="width: 100%;">
-				<form  name="fSolicitacao" id="fSolicitacao" method="post">
+				<form action="<?php echo GLOBAL_PATH; ?>busca?op=1" name="fSolicitacao" id="fSolicitacao" method="post">
 				
 				<input type="hidden" name="cmd" id="comd" value="incluir_solicitacao"/>
 				
@@ -177,8 +180,8 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
 				<input type="hidden" name="solicitacao[id_motoboy]" id="id_motoboy" value="2"/>
 				<input type="hidden" name="solicitacao[id_solicitacao_endereco_busca]" id="id_solicitacao_endereco_busca" value=""/>
 				<input type="hidden" name="solicitacao[id_solicitacao_endereco_entrega]" id="id_solicitacao_endereco_entrega" value=""/>
-				<input type="hidden" name="solicitacao[id_categoria]" id="id_categoria" value="1"/>
-				<input type="hidden" name="solicitacao[data]" id="data" value="30-11-2014 00:00:00"/>
+				<input type="hidden" name="solicitacao[id_categoria]" id="id_categoria" value="<?php echo $categ ?>"/>
+				<input type="hidden" name="solicitacao[data]" id="data" value="<?php echo date("Y-m-d H:i:s") ?>"/>
 				<input type="hidden" name="solicitacao[valor]" id="valor" value="<?php echo $valor_total ?>"/>
 				<input type="hidden" name="solicitacao[ativo]" id="ativo" value="1"/>
 				
@@ -233,7 +236,7 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
                 </tr>
 				<tr  colspan="2">  
 					<td>
-						Tipo de material: <?php echo $tipo_material ?>
+						Tipo de material: <?php echo $tipo_material ?> 
 					</td>
 				</tr>
 				<tr  colspan="2">  
@@ -285,6 +288,23 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
                     <input type="text" name="pontob[responsavel]" placeholder="Responsavel:" value="<?php echo (is_array($_POST['pontob'])) ? $_POST['pontob']['responsavel'] : '' ?>"/>
                     <input type="text" class="obs" name="pontob[observacao]" placeholder="Obs:" value="<?php echo (is_array($_POST['pontob'])) ? $_POST['pontob']['observacao'] : '' ?>"/>
                 </div>
+				<div style="margin:auto;width: 50%;"> 
+					
+					<h2>Tipo de material:</h2>
+					<select name="categ" class="form-control" >
+					<option value="0">selecione</option>
+					<?php 
+					$categorias = Categoria::from('categoria')
+					->select('id_categoria','nome')
+					->get();
+					
+					foreach ($categorias as $dado){ ?>
+						
+						<option value="<?php echo $dado->id_categoria ?>"><?php echo $dado->nome ?></option>
+					
+					<?php }//Fechando foreach?>
+					</select>
+				</div>
                     <input type="hidden" name="cmd" id="comd" value="consultar"/>
 					<input type="hidden" name="op" id="opcao" value="1"/>
                     <input type="submit" name="btnConsultar" class="animate" id="btnConsultar" value="Consultar"/>
