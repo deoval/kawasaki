@@ -6,7 +6,6 @@ $db->setFrom("solicitacao as s, cliente as c, motoboy as m, solicitacao_endereco
 $db->setWhere("and s.id_cliente = c.id_cliente and s.id_motoboy = m.id_motoboy 
 	and s.id_solicitacao_endereco_busca = send.id_solicitacao_endereco and s.id_categoria = cat.id_categoria");
 */
-$_SESSION['site'][_EMPRESA_]['cliente']["id_cliente"]=6;
 $id_cliente=$_SESSION['site'][_EMPRESA_]['cliente']["id_cliente"];
 $mes= isset($_POST['m']) && intval($_POST['m']) > 0 ? $_POST['m'] : 0;
 
