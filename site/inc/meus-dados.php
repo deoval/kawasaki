@@ -12,19 +12,21 @@ if (isset($_POST['cmd']) && $_POST['cmd'] == "salvar"){
 
     if($_POST['senha'] == $_POST['repetirSenha'] ){
 
-        $updateCliente = $objCliente;
-        foreach ($_POST as $key => $value) {
-            
-            if($key == "nome" || $key == "email" || $key == "cpf" || $key == "cnpj" || $key == "telefone" || $key == "endereco" 
-                || $key == "bairro" || $key == "cep" || $key == "numero" || $key == "complemento" 
-                || $key == "cidade")  $updateCliente->$key = $value;
-            
-            if ($key == "senha") {
-                $updateCliente->$key = md5($value);
+        if (isset($objCliente)) {
+            $updateCliente = $objCliente;
+            foreach ($_POST as $key => $value) {
+                
+                if($key == "nome" || $key == "email" || $key == "cpf" || $key == "cnpj" || $key == "telefone" || $key == "endereco" 
+                    || $key == "bairro" || $key == "cep" || $key == "numero" || $key == "complemento" 
+                    || $key == "cidade")  $updateCliente->$key = $value;
+                
+                if ($key == "senha") {
+                    $updateCliente->$key = md5($value);
+                }
             }
-        }
-        //var_dump($id_cliente);
-        $updateCliente->save();        
+            //var_dump($id_cliente);
+            $updateCliente->save();
+        }        
     }
     else{
       $msgErro = 'block';  
