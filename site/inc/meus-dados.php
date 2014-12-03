@@ -6,22 +6,33 @@ $session_id_cliente = $_SESSION['site'][_EMPRESA_]['cliente']["id_cliente"];
 $id_cliente = isset($session_id_cliente) && intval($session_id_cliente) > 0 ? (int) $session_id_cliente : 0;
 //$objCliente = new SqlCliente($id_cliente);
 $objCliente = Cliente::find($id_cliente);
+$msgErro = 'none';
 
 if (isset($_POST['cmd']) && $_POST['cmd'] == "salvar"){
 
-    $updateCliente = $objCliente;
-    foreach ($_POST as $key => $value) {
-        
-        if($key == "nome" || $key == "email" || $key == "cpf" || $key == "cnpj")  $updateCliente->$key = $value;
-        if ($key == "senha") {
-            $updateCliente->$key = md5($value);
+    if($_POST['senha'] == $_POST['repetirSenha'] ){
+
+        $updateCliente = $objCliente;
+        foreach ($_POST as $key => $value) {
+            
+            if($key == "nome" || $key == "email" || $key == "cpf" || $key == "cnpj" || $key == "telefone" || $key == "endereco" 
+                || $key == "bairro" || $key == "cep" || $key == "numero" || $key == "complemento" 
+                || $key == "cidade")  $updateCliente->$key = $value;
+            
+            if ($key == "senha") {
+                $updateCliente->$key = md5($value);
+            }
         }
+        //var_dump($id_cliente);
+        $updateCliente->save();        
     }
-    //var_dump($id_cliente);
-    $updateCliente->save();
+    else{
+      $msgErro = 'block';  
+     }
 }
 
 ?>
+
 <!DOCTYPE html>
 <html>
     
@@ -101,7 +112,9 @@ if (isset($_POST['cmd']) && $_POST['cmd'] == "salvar"){
                                             <label for="repetirSenha" class="col-md-4">Repetir Senha</label>
                                             <div class="col-md-8">
                                                 <input type="password" class="form-control" name="<?php echo $objCliente->tabela; ?>repetirSenha" id="repetirSenha" maxlength="10">
+                                                
                                                 <p class="help-block"></p>
+                                                <p name="erroSenha" id="erroSenha" style="color:red; font-size:13px; display:<?php echo $msgErro;?>" > As senha devem ser iguais</p>
                                             </div> <!-- /controls -->				
                                         </div> <!-- /control-group -->
 
@@ -180,17 +193,5 @@ if (isset($_POST['cmd']) && $_POST['cmd'] == "salvar"){
 
     </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
 
 </div>
