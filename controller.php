@@ -2,6 +2,8 @@
 session_start();
 
 include_once("inc_config.php");
+require "site/vendor/autoload.php";
+require "site/config/database.php";
 
 try {
 
