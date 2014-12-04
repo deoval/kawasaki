@@ -20,7 +20,7 @@ if (isset($_POST['cmd']) && $_POST['cmd'] == "salvar"){
                     || $key == "bairro" || $key == "cep" || $key == "numero" || $key == "complemento" 
                     || $key == "cidade")  $updateCliente->$key = $value;
                 
-                if ($key == "senha") {
+                if ($key == "senha" && ! empty($value)) {
                     $updateCliente->$key = md5($value);
                 }
             }

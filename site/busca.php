@@ -5,6 +5,7 @@ require "config/database.php";
 $op = isset($urlGet['op']) && intval($urlGet['op']) > 0 ? (int) $urlGet['op'] : 0;
 $op2 = isset($_POST['op']) && intval($_POST['op']) > 0 ? (int) $_POST['op'] : 0;
 $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
+//$_SESSION['site'][_EMPRESA_]['cliente']["id_cliente"]=6;
 ?>
 <html class="no-js" lang="en">
     <head>
@@ -110,7 +111,7 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
 				$entrega_observacao=$_POST['pontob']['observacao'];
 				$entrega_responsavel=$_POST['pontob']['responsavel'];
 				
-				$solicitacao_id_cliente;
+				$solicitacao_id_cliente=$_SESSION['site'][_EMPRESA_]['cliente']["id_cliente"];
 				$solicitacao_id_motoboy;
 				$solicitacao_id_solicitacao_endereco_busca;
 				$solicitacao_id_solicitacao_endereco_entrega;
@@ -119,7 +120,7 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
 				$solicitacao_valor;
 				$solicitacao_ativo;
 		   
-		   
+			
 		   $objconfig = new Config();
 		   $valor_km = (float)$objconfig->_lista(array(  item =>  "item = 'valor_quilometragem'"),"","")[0]['value'];
 		   
@@ -176,7 +177,7 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
 				<input type="hidden" name="end_solicita_entrega[observacao]" id="observacao" value="<?php echo $entrega_observacao ?>"/>
 				<input type="hidden" name="end_solicita_entrega[responsavel]" id="responsavel" value="<?php echo $entrega_responsavel ?>"/>
 				
-				<input type="hidden" name="solicitacao[id_cliente]" id="id_cliente" value="6"/>
+				<input type="hidden" name="solicitacao[id_cliente]" id="id_cliente" value="<?php echo $solicitacao_id_cliente ?>"/>
 				<input type="hidden" name="solicitacao[id_motoboy]" id="id_motoboy" value="2"/>
 				<input type="hidden" name="solicitacao[id_solicitacao_endereco_busca]" id="id_solicitacao_endereco_busca" value=""/>
 				<input type="hidden" name="solicitacao[id_solicitacao_endereco_entrega]" id="id_solicitacao_endereco_entrega" value=""/>
