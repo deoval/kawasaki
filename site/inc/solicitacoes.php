@@ -16,7 +16,7 @@ seb.id_solicitacao_endereco as sendbusca_id, seb.endereco as enderecoa, seb.nume
 see.id_solicitacao_endereco as sendentrega_id , see.endereco as enderecob , see.numero as numerob, see.bairro as bairrob, see.cidade as cidadeb" );
 $db->setFrom("solicitacao as s");
 $db->setJoin("inner join cliente as c on s.id_cliente = c.id_cliente
-inner join motoboy as m on s.id_motoboy=m.id_motoboy
+left join motoboy as m on s.id_motoboy=m.id_motoboy
 inner join solicitacao_endereco as seb on seb.id_solicitacao_endereco=s.id_solicitacao_endereco_busca
 inner join solicitacao_endereco as see on see.id_solicitacao_endereco=s.id_solicitacao_endereco_entrega");
 if ((int)$mes >0 && (int)$mes<13)

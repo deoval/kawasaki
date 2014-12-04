@@ -52,7 +52,11 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
 		    else
 				$objsolicitacao_end_entrega->Edita();					
 		
+			$idcateg=explode("|", $_POST['solicitacao']['id_categoria']);
+			$_POST['solicitacao']['id_categoria']=$idcateg[0];
 
+			
+			
 			$objsolicitacao = new SqlSolicitacao((int) $_POST['solicitacao']['id_solicitacao']);
 			$_POST['solicitacao']['id_solicitacao'] = (int) $objsolicitacao->id_solicitacao;
 			$_POST['solicitacao']['id_solicitacao_endereco_busca']=(int) $objsolicitacao_end_busca->id_solicitacao_endereco;
@@ -112,13 +116,8 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
 				$entrega_responsavel=$_POST['pontob']['responsavel'];
 				
 				$solicitacao_id_cliente=$_SESSION['site'][_EMPRESA_]['cliente']["id_cliente"];
-				$solicitacao_id_motoboy;
-				$solicitacao_id_solicitacao_endereco_busca;
-				$solicitacao_id_solicitacao_endereco_entrega;
-				$categ=$_POST['categ'];
-				$solicitacao_data;
-				$solicitacao_valor;
-				$solicitacao_ativo;
+
+
 		   
 			
 		   $objconfig = new Config();
@@ -129,27 +128,57 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
 		   $distancia_sem_km = str_replace(" km", "", $distancia['distancia']);
 		   $distancia_sem_km = (float)str_replace(",", ".", $distancia_sem_km);
 		   
-		   $objcategoria = Categoria::select('id_categoria','nome','custo_adicional')
-		   ->from('categoria')
-		   ->where('id_categoria','=',$categ)
-		   ->get();
-		   foreach ($objcategoria as $dado){
-				$tipo_material = $dado->nome;
-				$custo_adicional = $dado->custo_adicional;
-		   }
 		   
 		   if ( $distancia_minima > $distancia_sem_km){
-				$preco_servico = $distancia_minima * $valor_km;
+				$valor = $distancia_minima * $valor_km;
 		   }
 		   else{
-				$preco_servico = (int)$distancia_sem_km * (int)$valor_km;
+				$valor = (int)$distancia_sem_km * (int)$valor_km;
 		   }
-		   $valor_total = $preco_servico + $custo_adicional;
+		   
 			
         ?>
 		 <div class="resultadoMotoboy">
         
             <h2>Resultado da Busca</h2>
+            <table class="content" style="width: 100%;">
+
+                <tr>
+                    <td colspan="2">
+                        Motoboy's
+                    </td>
+                </tr>
+                <?php
+                if (is_array($geoA)) {
+                    $lng = $geoA['lng'];
+                    $lat = $geoA['lat'];
+                    $db = new DB();
+                    $db->setColuns("*, (acos(sin(radians(" . $lat . ")) * sin(radians(lat)) + cos(radians(" . $lat . ")) * cos(radians(lat)) * cos(radians(lng) - radians(" . $lng . "))) * 6378) as DISTANCIA");
+                    $db->setFrom("motoboy");
+                    $db->setHaving(" && DISTANCIA > 0");
+                    $db->setOrder("DISTANCIA ASC");
+
+                    //echo $db->Select();
+                    
+                    $db->Query($db->Select());
+
+                    while ($dado = $db->Fetch()) {
+                        ?>
+                        <tr>
+                            <td>
+                                Motoboy: <?php echo $dado->nome?><br/>
+                                Distancia aproximada: <?php echo ($dado->DISTANCIA >= 1) ? number_format($dado->DISTANCIA, 1, ',', '.') . ' km' : floor($dado->DISTANCIA * 1000) . ' m';?>
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                }
+                ?>
+
+
+			</table>
+		
+			<h2>Orçamento</h2>
             <table class="content" style="width: 100%;">
 				<form action="<?php echo GLOBAL_PATH; ?>busca?op=1" name="fSolicitacao" id="fSolicitacao" method="post">
 				
@@ -178,85 +207,72 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
 				<input type="hidden" name="end_solicita_entrega[responsavel]" id="responsavel" value="<?php echo $entrega_responsavel ?>"/>
 				
 				<input type="hidden" name="solicitacao[id_cliente]" id="id_cliente" value="<?php echo $solicitacao_id_cliente ?>"/>
-				<input type="hidden" name="solicitacao[id_motoboy]" id="id_motoboy" value="2"/>
+				<input type="hidden" name="solicitacao[id_motoboy]" id="id_motoboy" value=""/>
 				<input type="hidden" name="solicitacao[id_solicitacao_endereco_busca]" id="id_solicitacao_endereco_busca" value=""/>
 				<input type="hidden" name="solicitacao[id_solicitacao_endereco_entrega]" id="id_solicitacao_endereco_entrega" value=""/>
-				<input type="hidden" name="solicitacao[id_categoria]" id="id_categoria" value="<?php echo $categ ?>"/>
 				<input type="hidden" name="solicitacao[data]" id="data" value="<?php echo date("Y-m-d H:i:s") ?>"/>
-				<input type="hidden" name="solicitacao[valor]" id="valor" value="<?php echo $valor_total ?>"/>
+				<input type="hidden" name="solicitacao[valor]" id="solicitacao-valor" value=""/>
 				<input type="hidden" name="solicitacao[ativo]" id="ativo" value="1"/>
-				
-                <tr>
-                    <td colspan="2">
-                        Motoboy's
-                    </td>
-                </tr>
-                <?php
-                if (is_array($geoA)) {
-                    $lng = $geoA['lng'];
-                    $lat = $geoA['lat'];
-                    $db = new DB();
-                    $db->setColuns("*, (acos(sin(radians(" . $lat . ")) * sin(radians(lat)) + cos(radians(" . $lat . ")) * cos(radians(lat)) * cos(radians(lng) - radians(" . $lng . "))) * 6378) as DISTANCIA");
-                    $db->setFrom("motoboy");
-                    $db->setHaving(" && DISTANCIA > 0");
-                    $db->setOrder("DISTANCIA ASC");
-
-                    //echo $db->Select();
-                    
-                    $db->Query($db->Select());
-
-                    while ($dado = $db->Fetch()) {
-                        ?>
-                        <tr>
-                            <td>
-                                Motoboy: <?php echo $dado->nome?><br/>
-                                Distancia aproximada: <?php echo ($dado->DISTANCIA >= 1) ? number_format($dado->DISTANCIA, 1, ',', '.') . ' km' : floor($dado->DISTANCIA * 1000) . ' m';?>
-                            </td>
-							<td>
-								<input type="submit" name="btnSolicitar" class="animate" id="btnSolicitar" value="Solicitar"/>
-							</td>
-                        </tr>
-                        <?php
-                    }
-                }
-                ?>
-				<form>
-			</table>
-		
-			<h2>Orçamento</h2>
-            <table class="content" style="width: 100%;">
-                <tr>
-					<td colspan="2">
-                            Distância aproximada: <?php echo $distancia['distancia'] ?>
+							
+				<tr  colspan="2">
+					<td>
+						Tipo de solicitação: 
+					</td>
+					<td>
+						<select name="solicitacao[tipo_solicitacao]">
+						<option value="0">selecione</option>	
+						<option value="Avulsa">Avulsa</option>
+						<option value="Mensal">Mensal</option>
+						</select>
+					</td>
+                </tr>	
+			    <tr  colspan="2">
+					<td>
+						Tipo de material: 
+					</td>
+					<td>
+						<select name="solicitacao[id_categoria]" class="slccateg">
+						<option value="0">selecione</option>
+						<?php 
+						$categorias = Categoria::from('categoria')
+						->select('id_categoria','nome','custo_adicional')
+						->get();
+						
+						foreach ($categorias as $dado){ ?>
+							
+							<option value="<?php echo $dado->id_categoria . "|" . $dado->custo_adicional ?>"><?php echo $dado->nome ?></option>
+						
+						<?php }//Fechando foreach?>
+						</select>
 					</td>
                 </tr>
-                <tr>
-                    <td colspan="2">
-                        Tempo aproximado: <?php echo $distancia['tempo'] ?>
-                    </td>
+                <tr  colspan="2">
+					<td>
+						Distância aproximada: <?php echo $distancia['distancia'] ?>
+					</td>
                 </tr>
 				<tr  colspan="2">  
 					<td>
-						Tipo de material: <?php echo $tipo_material ?> 
-					</td>
-				</tr>
-				<tr  colspan="2">  
-					<td>
-						Preço do serviço: R$ <?php echo $preco_servico ?>
+						Preço do serviço: R$ <span id="spanprecoserv"><?php echo $valor ?><span/>
 
 					</td>
 				</tr>
 				<tr  colspan="2">  
 					<td>					
-					Custo adicional: R$  <?php echo $custo_adicional ?>
+					Custo adicional: R$  <span id="spancustoadicional"><?php echo $custo_adicional ?><span/>
 					</td>
 				</tr>
 				<tr  colspan="2">  
 					<td>					
-					Valor total: R$  <?php echo $valor_total ?>
+					Valor total: R$  <span id="spanvalortotal"><?php echo $valor ?><span/>
 					</td>
 				</tr>
-                    
+				<tr>
+					<td>
+						<input type="submit" name="btnSolicitar" class="animate" id="btnSolicitar" value="Solicitar"/>
+					</td>
+				</tr>
+				<form>                    
             </table>
         </div>	
 				
@@ -289,23 +305,6 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
                     <input type="text" name="pontob[responsavel]" placeholder="Responsavel:" value="<?php echo (is_array($_POST['pontob'])) ? $_POST['pontob']['responsavel'] : '' ?>"/>
                     <input type="text" class="obs" name="pontob[observacao]" placeholder="Obs:" value="<?php echo (is_array($_POST['pontob'])) ? $_POST['pontob']['observacao'] : '' ?>"/>
                 </div>
-				<div style="margin:auto;width: 50%;"> 
-					
-					<h2>Tipo de material:</h2>
-					<select name="categ" class="form-control" >
-					<option value="0">selecione</option>
-					<?php 
-					$categorias = Categoria::from('categoria')
-					->select('id_categoria','nome')
-					->get();
-					
-					foreach ($categorias as $dado){ ?>
-						
-						<option value="<?php echo $dado->id_categoria ?>"><?php echo $dado->nome ?></option>
-					
-					<?php }//Fechando foreach?>
-					</select>
-				</div>
                     <input type="hidden" name="cmd" id="comd" value="consultar"/>
 					<input type="hidden" name="op" id="opcao" value="1"/>
                     <input type="submit" name="btnConsultar" class="animate" id="btnConsultar" value="Consultar"/>

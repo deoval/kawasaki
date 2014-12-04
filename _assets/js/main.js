@@ -405,7 +405,21 @@ PRO.home = {
                }
 
            });
-       } 
+       }
+	   $('.slccateg').change(function(){
+			
+			$( ".slccateg option:selected" ).each(function() {
+				
+				var str= $( this ).val().split('|');
+				var custoadicional = str[1];
+				var valor = $('#spanprecoserv').text(); 
+				$('#spancustoadicional').text(custoadicional);
+				var valortotal = parseFloat(custoadicional) + parseFloat(valor);
+				$('#spanvalortotal').text(valortotal);
+				$('#solicitacao-valor').val(valortotal);
+			});
+					
+		});
     }
 };
 
