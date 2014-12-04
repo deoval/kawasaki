@@ -19,6 +19,7 @@ class Solicitacao extends Eloquent{
 	private $valor;
 	private $ativo;
 	private $tipo_solicitacao;
+	private $escala_delivery;
 	
 
     public function __construct() {
@@ -68,6 +69,10 @@ class Solicitacao extends Eloquent{
 	public function getTipo_solicitacao() {
 		return $this->tipo_solicitacao;
 	}
+	
+	public function getEscala_delivery() {
+		return $this->escala_delivery;
+	}
 
     public function setId_solicitacao($id_solicitacao) {
         $this->id_solicitacao = $id_solicitacao;
@@ -108,6 +113,11 @@ class Solicitacao extends Eloquent{
 	public function setTipo_solicitacao($tipo_solicitacao) {
 		$this->tipo_solicitacao = $tipo_solicitacao;
 	}
+	
+	public function setEscala_delivery($escala_delivery) {
+		$this->escala_delivery= $escala_delivery;
+	}
+	
 }
 
 ?>

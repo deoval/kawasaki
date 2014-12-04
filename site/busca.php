@@ -141,44 +141,7 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
 		 <div class="resultadoMotoboy">
         
             <h2>Resultado da Busca</h2>
-            <table class="content" style="width: 100%;">
 
-                <tr>
-                    <td colspan="2">
-                        Motoboy's
-                    </td>
-                </tr>
-                <?php
-                if (is_array($geoA)) {
-                    $lng = $geoA['lng'];
-                    $lat = $geoA['lat'];
-                    $db = new DB();
-                    $db->setColuns("*, (acos(sin(radians(" . $lat . ")) * sin(radians(lat)) + cos(radians(" . $lat . ")) * cos(radians(lat)) * cos(radians(lng) - radians(" . $lng . "))) * 6378) as DISTANCIA");
-                    $db->setFrom("motoboy");
-                    $db->setHaving(" && DISTANCIA > 0");
-                    $db->setOrder("DISTANCIA ASC");
-
-                    //echo $db->Select();
-                    
-                    $db->Query($db->Select());
-
-                    while ($dado = $db->Fetch()) {
-                        ?>
-                        <tr>
-                            <td>
-                                Motoboy: <?php echo $dado->nome?><br/>
-                                Distancia aproximada: <?php echo ($dado->DISTANCIA >= 1) ? number_format($dado->DISTANCIA, 1, ',', '.') . ' km' : floor($dado->DISTANCIA * 1000) . ' m';?>
-                            </td>
-                        </tr>
-                        <?php
-                    }
-                }
-                ?>
-
-
-			</table>
-		
-			<h2>Orçamento</h2>
             <table class="content" style="width: 100%;">
 				<form action="<?php echo GLOBAL_PATH; ?>busca?op=1" name="fSolicitacao" id="fSolicitacao" method="post">
 				
@@ -246,9 +209,23 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
 						</select>
 					</td>
                 </tr>
+				<tr  colspan="2">
+					<td>
+						Programação de escala delivery com contrato:
+						<span id="helpBlock" class="help-block">*Necessário solicitar motoboy extra com 3 dias de antecedência</span>
+					</td>
+					<td>
+						<select name="solicitacao[escala_delivery]">
+						<option value="0">Não</option>	
+						<option value="1">Sim</option>
+						</select>
+					</td>
+                </tr>
                 <tr  colspan="2">
 					<td>
 						Distância aproximada: <?php echo $distancia['distancia'] ?>
+					</td>
+					<td>
 					</td>
                 </tr>
 				<tr  colspan="2">  
@@ -256,19 +233,25 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
 						Preço do serviço: R$ <span id="spanprecoserv"><?php echo $valor ?><span/>
 
 					</td>
+					<td>
+					</td>
 				</tr>
 				<tr  colspan="2">  
 					<td>					
 					Custo adicional: R$  <span id="spancustoadicional"><?php echo $custo_adicional ?><span/>
+					</td>
+					<td>
 					</td>
 				</tr>
 				<tr  colspan="2">  
 					<td>					
 					Valor total: R$  <span id="spanvalortotal"><?php echo $valor ?><span/>
 					</td>
-				</tr>
-				<tr>
 					<td>
+					</td>
+				</tr>
+				<tr colspan="2">
+					<td colspan="2">
 						<input type="submit" name="btnSolicitar" class="animate" id="btnSolicitar" value="Solicitar"/>
 					</td>
 				</tr>
