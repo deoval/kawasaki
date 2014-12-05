@@ -56,22 +56,23 @@ $titleIcon = 'icon-cog';
                                     </form>
                                     
                                     <?php
-                                    if ($_SESSION[_EMPRESA_]["SYS"]["id_usuario_perfil"] == 1) {
-                                        ?>
+                                    //if ($_SESSION[_EMPRESA_]["SYS"]["id_usuario_perfil"] == 1) {
+                                    //    ?>
                                         <div class="pull-right col-md-2">
                                             <a href="../config/form.php" class="btn btn-default">
                                                 <i class="icon-plus"></i>
                                                 Novo cadastro
                                             </a>
                                         </div>
-                                        <?php
-                                    }
-                                    ?>
+                                    <?php
+                                    //}
+                                    //?>
 
                                     <table id="grid-config" class="grid-lista">
                                         <thead>
                                             <tr>
-                                                <td class="col-md-10">Item</td>
+                                                <td class="col-md-2">Item</td>
+												<td class="col-md-2">Descrição</td>
                                                 <td class="col-md-2">Edição</td>
                                             </tr>  
                                         </thead>

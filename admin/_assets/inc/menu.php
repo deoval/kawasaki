@@ -19,7 +19,8 @@
             array('idMenu' => 7, 'link' => "../cliente/main.php", 'title' => "Clientes", 'icon' => "icon-group"),
             array('idMenu' => 9, 'link' => "../motoboy/main.php", 'title' => "Moto boy", 'icon' => "icon-bicycle"),
             array('idMenu' => 10, 'link' => "javascript:;;", 'title' => "Atendimento", 'icon' => "icon-comment"),
-            array('idMenu' => 6, 'link' => "../newsletter/main.php", 'title' => "Newsletter", 'icon' => "icon-globe"),
+            //array('idMenu' => 6, 'link' => "../newsletter/main.php", 'title' => "Newsletter", 'icon' => "icon-globe"),	
+			array('idMenu' => 2, 'link' => "../config/main.php", 'title' => "Configurações", 'icon' => "icon-cog"),
         );
 
         $arraySubmenu = array(

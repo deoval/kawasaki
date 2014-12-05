@@ -61,7 +61,15 @@ $objConfig = new SqlConfig($id_config);
                                                 <p class="help-block"></p>
                                             </div> <!-- /controls -->				
                                         </div> <!-- /control-group -->
-
+										
+										<div class="form-group">											
+                                            <label for="descricao" class="col-md-4">Descrição</label>
+                                            <div class="col-md-8">
+                                                <textarea class="form-control" rows="3" name="<?php echo $objConfig->tabela; ?>[descricao]" id="descricao"><?php echo $objConfig->descricao; ?></textarea>
+                                                <p class="help-block"></p>
+                                            </div> <!-- /controls -->				
+                                        </div> <!-- /control-group -->
+										
                                         <div class="form-group">
                                             <div class="col-md-offset-4 col-md-8">
                                                 <button type="submit" class="btn btn-primary">Save</button> <button type="button" onclick="document.location.href = '../config/main.php'" class="btn btn-default">Cancel</button>

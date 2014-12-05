@@ -11,10 +11,13 @@ try {
     if (isset($_POST['cmd']) && $_POST['cmd'] == 'login') { 
 
         if (SqlCliente::_login($_POST['user'], $_POST['senha'])) {
-            echo 'Login realizado com sucesso.';
-            echo '<br/><a href="' . GLOBAL_PATH . 'busca">Continuar</a>';
+            //echo 'Login realizado com sucesso.';
+            echo '<script language= "JavaScript">location.href="' . GLOBAL_PATH . 'busca"</script>';
         } else {
+		
+			
             throw new Exception('Usuário ou senha incorretos!');
+			
         }
         die;
     }
@@ -53,8 +56,8 @@ try {
             $objCliente->Edita();
         }
 
-        echo 'O cadastro foi salvo com sucesso.';
-        echo '<br/><a href="' . GLOBAL_PATH . 'busca">Continuar</a>';
+        //echo 'O cadastro foi salvo com sucesso.';
+        echo '<script language= "JavaScript">location.href="' . GLOBAL_PATH . 'busca"</script>';
         die;
     }
     
@@ -100,8 +103,8 @@ try {
             $objMotoboy->Edita();
         }
 
-        echo 'Obrigado! O cadastro foi salvo com sucesso.';
-        //echo '<br/><a href="' . GLOBAL_PATH . 'busca">Continuar</a>';
+        //echo 'Obrigado! O cadastro foi salvo com sucesso.';
+        echo '<script language= "JavaScript">location.href="' . GLOBAL_PATH . '"</script>';
         die;
     }
 } catch (Exception $e) {

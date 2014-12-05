@@ -6,6 +6,7 @@ class Config{
     private $id_config;
     private $item;
     private $value;
+	private $descricao;
 
     public function __construct() {}
 
@@ -24,6 +25,10 @@ class Config{
     public function getValue() {
         return $this->value;
     }
+	
+	public function getDescricao() {
+        return $this->descricao;
+    }
 
     public function setId_config($id_config) {
         $this->id_config = $id_config;
@@ -37,7 +42,9 @@ class Config{
         $this->value = $value;
     }
 
-
+    public function setDescricao($descricao) {
+        $this->descricao = $descricao;
+    }
 }
 
 ?>

@@ -86,6 +86,7 @@ try {
                     "id" => $aConfig['id_config'],
                     "cell" => array(
                         $aConfig['item'],
+						$aConfig['descricao'],
                     )
                 );
             }
