@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class ClienteE extends Eloquent{
+class Cliente extends Eloquent{
 
     protected $table = 'cliente';
     public $timestamps = false;
