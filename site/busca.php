@@ -197,13 +197,12 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
 						<select name="solicitacao[id_categoria]" class="slccateg">
 						<option value="0">selecione</option>
 						<?php 
-						$categorias = Categoria::from('categoria')
-						->select('id_categoria','nome','custo_adicional')
-						->get();
+						
+						$categorias = Categoria::_lista("","","");
 						
 						foreach ($categorias as $dado){ ?>
 							
-							<option value="<?php echo $dado->id_categoria . "|" . $dado->custo_adicional ?>"><?php echo $dado->nome ?></option>
+							<option value="<?php echo $dado['id_categoria'] . "|" . $dado['custo_adicional'] ?>"><?php echo $dado['nome'] ?></option>
 						
 						<?php }//Fechando foreach?>
 						</select>
