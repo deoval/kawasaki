@@ -1,43 +1,21 @@
 <?php
 
-class Categoria{
+class SqlCategoria Extends SqlPadrao {
 
-    private $tabela = "categoria";
-    private $id_categoria;
-    private $nome;
-    private $custo_adicional;
+    protected $obj;
 
-    public function __construct() {}
+    public function __construct($id = 0, $encode = false) {
+        $this->obj = new Categoria();
 
-    public function getTabela() {
-        return $this->tabela;
+        $id = (int) $id;
+
+        if ($id > 0)
+            $this->Carrega($id, $encode);
+        else
+            $this->CarregaDefault();
     }
 
-    public function getId_categoria() {
-        return $this->id_categoria;
-    }
-
-    public function getNome() {
-        return $this->nome;
-    }
-
-    public function getCusto_adicional() {
-        return $this->custo_adicional;
-    }
-
-    public function setId_categoria($id_categoria) {
-        $this->id_categoria = $id_categoria;
-    }
-
-    public function setNome($nome) {
-        $this->nome = $nome;
-    }
-
-    public function setCusto_adicional($custo_adicional) {
-        $this->custo_adicional = $custo_adicional;
-    }
-	
-		    /**
+    /**
      * Função que que retorna um array com o resultado da pesquisa
      */
     public static function _lista($where = array(), $limit = "", $order = "") {
@@ -59,7 +37,7 @@ class Categoria{
         }
 
         //die($dbClass->Select());
-		
+
         return $dbClass->getArrayBySelect($dbClass->Select());
     }
     
@@ -175,8 +153,6 @@ class Categoria{
         return $exist;
     }
 
-
-	
 }
 
 ?>

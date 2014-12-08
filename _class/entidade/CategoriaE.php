@@ -1,6 +1,11 @@
 <?php
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Categoria{
+class CategoriaE extends Eloquent{
+
+    protected $table = 'categoria';
+    public $timestamps = false;
+    protected $primaryKey = 'id_categoria';
 
     private $tabela = "categoria";
     private $id_categoria;
@@ -37,7 +42,9 @@ class Categoria{
         $this->custo_adicional = $custo_adicional;
     }
 	
-		    /**
+		
+	
+	    /**
      * Função que que retorna um array com o resultado da pesquisa
      */
     public static function _lista($where = array(), $limit = "", $order = "") {
@@ -65,7 +72,7 @@ class Categoria{
     
     public static function _totalRegistros($where = array()) {
         $dbClass = new DB();
-        $dbClass->setColuns("COUNT(id_categoria) AS TOTAL")->setFrom("categoria");
+        $dbClass->setColuns("COUNT(id_config) AS TOTAL")->setFrom("config");
 
         if (count($where) > 0) {
             foreach ($where as $consulta) {
@@ -84,14 +91,14 @@ class Categoria{
      */
     public static function _listaCombo() {
         $dbClass = new DB();
-        $dbClass->setColuns("id_categoria, nome");
-        $dbClass->setFrom("categoria");
+        $dbClass->setColuns("id_config, nome");
+        $dbClass->setFrom("config");
         $dbClass->setOrder("nome ASC");
         return $dbClass->getArrayBySelect($dbClass->Select());
     }
 
     /**
-     * Função que que retorna o nome da categoria
+     * Função que que retorna o nome da config
      */
     public static function _getNameByID($codigo) {
 
@@ -99,8 +106,8 @@ class Categoria{
 
         $dbClass = new DB();
         $dbClass->setColuns("nome");
-        $dbClass->setFrom("categoria");
-        $dbClass->setWhere(" && id_categoria = " . $codigo);
+        $dbClass->setFrom("config");
+        $dbClass->setWhere(" && id_config = " . $codigo);
 
         $dbClass->Query($dbClass->Select());
 
@@ -109,25 +116,25 @@ class Categoria{
     }
 
     /**
-     * Função que que retorna o id da categoria
+     * Função que que retorna o id da config
      */
     public static function _getIDByAlias($alias) {
 
         $alias2 = str_replace("-", " ", $alias);
 
         $dbClass = new DB();
-        $dbClass->setColuns("id_categoria");
-        $dbClass->setFrom("categoria");
+        $dbClass->setColuns("id_config");
+        $dbClass->setFrom("config");
         $dbClass->setWhere(" && NomeSemAcento = '" . $alias . "' || NomeSemAcento = '" . $alias2 . "'");
 
         $dbClass->Query($dbClass->Select());
 
         $dado = $dbClass->Fetch();
-        return $dado->id_categoria;
+        return $dado->id_config;
     }
 
     /**
-     * Função que que retorna o alias da categoria
+     * Função que que retorna o alias da config
      */
     public static function _getAliasByID($codigo) {
 
@@ -135,8 +142,8 @@ class Categoria{
 
         $dbClass = new DB();
         $dbClass->setColuns("NomeSemAcento");
-        $dbClass->setFrom("categoria");
-        $dbClass->setWhere(" && id_categoria = " . $codigo);
+        $dbClass->setFrom("config");
+        $dbClass->setWhere(" && id_config = " . $codigo);
 
         $dbClass->Query($dbClass->Select());
 
@@ -145,26 +152,26 @@ class Categoria{
     }
 
     /**
-     * Função que que retorna o nome e o id da categoria para o combo
+     * Função que que retorna o nome e o id da config para o combo
      */
-    public function listaComboCategoria($ativo = FALSE) {
+    public function listaComboConfig($ativo = FALSE) {
 
         $dbClass = new DB();
         $dbClass->setColuns("nome, nome");
-        $dbClass->setFrom("categoria");
+        $dbClass->setFrom("config");
         if ($ativo != FALSE)
             $dbClass->setWhere(" && ativo = '" . $ativo . "'");
         return $dbClass->getArrayBySelect($dbClass->Select());
     }
 
     /**
-     * Função que verifica se a categoria existe
+     * Função que verifica se a config existe
      */
-    public static function _categoriaExist($nome) {
+    public static function _configExist($nome) {
 
         $dbClass = new DB();
-        $dbClass->setColuns("count(id_categoria) Total");
-        $dbClass->setFrom("categoria");
+        $dbClass->setColuns("count(id_config) Total");
+        $dbClass->setFrom("config");
         $dbClass->setWhere(" && nome = '" . $nome . "'");
 
         $dbClass->Query($dbClass->Select());
@@ -176,7 +183,7 @@ class Categoria{
     }
 
 
-	
+
 }
 
 ?>

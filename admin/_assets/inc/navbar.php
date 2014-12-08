@@ -46,13 +46,6 @@
                 </li>
                 
                 <li class="dropdown">
-                    <a href="../config/main.php" >
-                        <i class="icon-cog"></i>
-                        Configurações
-                    </a>
-                </li>
-                
-                <li class="dropdown">
                     <a href="<?php echo ADMIN_PATH; ?>" >
                         <i class="icon-share-alt"></i>
                         Encerrar sessão
