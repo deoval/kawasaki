@@ -7,7 +7,10 @@ $db->setWhere("and s.id_cliente = c.id_cliente and s.id_motoboy = m.id_motoboy
 	and s.id_solicitacao_endereco_busca = send.id_solicitacao_endereco and s.id_categoria = cat.id_categoria");
 */
 $id_cliente=$_SESSION['site'][_EMPRESA_]['cliente']["id_cliente"];
-$mes= isset($_POST['m']) && intval($_POST['m']) > 0 ? $_POST['m'] : 0;
+
+$mq= explode("|",isset($_POST['mq'])? $_POST['mq'] : "0|0");
+$m=$mq[0];
+$q=$mq[1];
 
 $db = new DB();
 $db->setColuns("s.id_solicitacao as solicitacao_id, s.data, s.ativo, s.valor, c.nome as cliente, s.id_cliente as cliente_id,
@@ -19,10 +22,12 @@ $db->setJoin("inner join cliente as c on s.id_cliente = c.id_cliente
 inner join motoboy as m on s.id_motoboy=m.id_motoboy
 inner join solicitacao_endereco as seb on seb.id_solicitacao_endereco=s.id_solicitacao_endereco_busca
 inner join solicitacao_endereco as see on see.id_solicitacao_endereco=s.id_solicitacao_endereco_entrega");
-if ((int)$mes >0 && (int)$mes<13)
-$db->setWhere("and s.id_cliente=". $id_cliente . " and s.ativo=0 and date_format(data,'%m')=" . $mes);
-else
-$db->setWhere("and s.id_cliente=". $id_cliente . " and s.ativo=0");
+if ((int)$m >0 && (int)$m<13 && (int)$q==1)
+	$db->setWhere(" and s.id_cliente=". $id_cliente . " and s.ativo=0 and date_format(data,'%m')=" . $m . " and date_format(data,'%d') <= 15");
+else if ((int)$m >0 && (int)$m<13 && (int)$q==2)
+	$db->setWhere(" and s.id_cliente=". $id_cliente . " and s.ativo=0 and date_format(data,'%m')=" . $m. " and date_format(data,'%d') >= 15");
+else	
+$db->setWhere(" and s.id_cliente=". $id_cliente . " and s.ativo=0");
 
 $db->Query($db->Select());
  
@@ -35,23 +40,35 @@ $db->Query($db->Select());
 
 <form method="post" action="">
 <h5>
-Selecione o mês:
+Selecione o período:
 </h5>
-<div style="width:15%;float:left">
-<select name="m" class="form-control" >
-<option value="0">Todos</option>
-<option value="1">janeiro</option>
-<option value="2">fevereiro</option>
-<option value="3">março</option>
-<option value="4">abril</option>
-<option value="5">maio</option>
-<option value="6">junho</option>
-<option value="7">julho</option>
-<option value="8">agosto</option>
-<option value="9">setembro</option>
-<option value="10">outubro</option>
-<option value="11">novembro</option>
-<option value="12">dezembro</option>
+<div style="width:21%;float:left">
+<select name="mq" class="form-control" >
+<option value="0|0">Todos</option>
+<option value="1|1">janeiro-1ª quinzena</option>
+<option value="1|2">janeiro-2ª quinzena</option>
+<option value="2|1">fevereiro-1ª quinzena</option>
+<option value="2|2">fevereiro-2ª quinzena</option>
+<option value="3|1">março-1ª quinzena</option>
+<option value="3|2">março-2ª quinzena</option>
+<option value="4|1">abril-1ª quinzena</option>
+<option value="4|2">abril-2ª quinzena</option>
+<option value="5|1">maio-1ª quinzena</option>
+<option value="5|2">maio-2ª quinzena</option>
+<option value="6|1">junho-1ª quinzena</option>
+<option value="6|2">junho-2ª quinzena</option>
+<option value="7|1">julho-1ª quinzena</option>
+<option value="7|2">julho-2ª quinzena</option>
+<option value="8|1">agosto-1ª quinzena</option>
+<option value="8|2">agosto-2ª quinzena</option>
+<option value="9|1">setembro-1ª quinzena</option>
+<option value="9|2">setembro-2ª quinzena</option>
+<option value="10|1">outubro-1ª quinzena</option>
+<option value="10|2">outubro-2ª quinzena</option>
+<option value="11|1">novembro-1ª quinzena</option>
+<option value="11|2">novembro-2ª quinzena</option>
+<option value="12|1">dezembro-1ª quinzena</option>
+<option value="12|2">dezembro-2ª quinzena</option>
 </select>
 </div><input type="submit" name="btnmesok" class="animate" id="btnmesok" value="Ok"/>
 </form>
