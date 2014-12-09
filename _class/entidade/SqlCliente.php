@@ -143,6 +143,13 @@ class SqlCliente Extends SqlPadrao {
         }
         $dbClass->Close();
     }
+	
+	public static function _logout(){
+		unset($_SESSION['site'][_EMPRESA_]['cliente']["id_cliente"]);
+		unset($_SESSION['site'][_EMPRESA_]['cliente']["nome"]);
+		unset($_SESSION['site'][_EMPRESA_]['cliente']["email"]);
+		echo '<script language= "JavaScript">location.href="' . GLOBAL_PATH . '"</script>';
+	}
 
 }
 

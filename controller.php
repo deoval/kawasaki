@@ -21,6 +21,11 @@ try {
         }
         die;
     }
+	
+	 if (isset($_POST['cmd']) && $_POST['cmd'] == 'logout') { 
+		SqlCliente::_logout();
+		die;
+    }
 
     if (isset($_POST['cmd']) && $_POST['cmd'] == 'salvarCliente') {
 

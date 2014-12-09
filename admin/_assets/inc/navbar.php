@@ -46,7 +46,7 @@
                 </li>
                 
                 <li class="dropdown">
-                    <a href="<?php echo ADMIN_PATH; ?>" >
+                    <a href="<?php echo ADMIN_PATH; ?>logout.php" >
                         <i class="icon-share-alt"></i>
                         Encerrar sessão
                     </a>

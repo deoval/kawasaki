@@ -14,6 +14,7 @@
                 <section class="top-bar-section">
                     <a href="<?php echo GLOBAL_PATH; ?>" class="logo"></a>
                     <div class="loginArea">
+					<?php if( (!isset($_SESSION['site'][_EMPRESA_]['cliente']["id_cliente"])) AND (!isset($_SESSION['site'][_EMPRESA_]['cliente']["id_cliente"])) ){?>
                         <p>ÁREA DO CLIENTE</p>
                         <form action="<?php echo GLOBAL_PATH; ?>controller.php" name="fLogin" id="fLogin" method="post">
                             <input type="text" name="user" id="user" placeholder="Login"/>
@@ -21,6 +22,14 @@
                             <input type="hidden" name="cmd" id="comd" value="login"/> 
                             <input type="submit" name="btnLogin" id="btnLogin" value="OK"/> 
                         </form>
+					<?php } else {?>
+						<form action="<?php echo GLOBAL_PATH; ?>controller.php" name="fLogout" id="fLogout" method="post">
+							<p>Olá, <?php echo $_SESSION['site'][_EMPRESA_]['cliente']["nome"]?>.</p>
+                            <input type="hidden" name="cmd" id="comd" value="logout"/>
+							<input type="button" name="btnOk" id="btnOk" onclick="location.href='busca';" value="Área do cliente" /> 
+                            <input type="submit" name="btnLogout" id="btnLogout" value="Logout" style="width:50px"/> 
+                        </form>
+					<?php }?>	
                         <div class="clear"></div>
                         <span class="tel"></span> <p>(11) 2872-0062</p>
                         <span class="mail"></span> <a href="mailto:contato@proattitudeservicos.com.br">CONTATO@PROATTITUDESERVICOS.COM.BR</a>

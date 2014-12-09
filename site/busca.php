@@ -1,5 +1,8 @@
 <!doctype html>
 <?php
+if( (!isset($_SESSION['site'][_EMPRESA_]['cliente']["id_cliente"])) AND (!isset($_SESSION['site'][_EMPRESA_]['cliente']["id_cliente"])) )
+echo '<script language= "JavaScript">location.href="' . GLOBAL_PATH . '"</script>';
+
 require "vendor/autoload.php";
 require "config/database.php";
 $op = isset($urlGet['op']) && intval($urlGet['op']) > 0 ? (int) $urlGet['op'] : 0;
@@ -80,7 +83,11 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
 			else if ($op == 3)
 				include('inc/meus-dados.php');
 			else if ($op==4)
-				include('inc/fale-conosco.php');			
+				include('inc/fale-conosco.php');
+			else if ($op==5){
+				SqlCliente::_logout();
+				echo '<script language= "JavaScript">location.href="' . GLOBAL_PATH . '"</script>';
+			}
 			else
 				include('inc/map-canvas.php');
 			

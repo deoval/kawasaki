@@ -24,6 +24,12 @@
                         Fale Conosco
                     </a>
                 </li>
+				
+				<li class="dropdown" style="color: #CBA;margin-right: 30px;font-size: medium;">
+                    <a href="?op=5" >
+                        Logout
+                    </a>
+                </li>
                 
             </ul>
 
