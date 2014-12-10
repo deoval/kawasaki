@@ -5,7 +5,7 @@
 $session_id_cliente = $_SESSION['site'][_EMPRESA_]['cliente']["id_cliente"];
 $id_cliente = isset($session_id_cliente) && intval($session_id_cliente) > 0 ? (int) $session_id_cliente : 0;
 //$objCliente = new SqlCliente($id_cliente);
-$objCliente = Cliente::find($id_cliente);
+$objCliente = ClienteE::find($id_cliente);
 $msgErro = 'none';
 
 if (isset($_POST['cmd']) && $_POST['cmd'] == "salvar"){

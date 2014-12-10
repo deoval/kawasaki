@@ -1,6 +1,6 @@
 <?php
 
-class Componente {
+class _Componente {
 
     /**
      * Monta uma div

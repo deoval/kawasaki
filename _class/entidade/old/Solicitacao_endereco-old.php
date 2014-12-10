@@ -1,6 +1,6 @@
 <?php
 
-class Solicitacao_endereco {
+class Solicitacao_endereco_old {
 
 	private $tabela = "solicitacao_endereco";
 	private $id_solicitacao_endereco;

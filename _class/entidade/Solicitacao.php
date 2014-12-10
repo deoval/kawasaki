@@ -1,14 +1,8 @@
 <?php
 
-use Illuminate\Database\Eloquent\Model as Eloquent;
+class Solicitacao {
 
-class Solicitacao extends Eloquent{
-
-    protected $table = 'solicitacao';
-    public $timestamps = false;
-    protected $primaryKey = 'id_solicitacao';
-	
-	private $tabela = "solicitacao";
+   	private $tabela = "solicitacao";
 	private $id_solicitacao;
 	private $id_cliente;
 	private $id_motoboy;

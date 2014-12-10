@@ -19,7 +19,7 @@
             array('idMenu' => 7, 'link' => "../cliente/main.php", 'title' => "Clientes", 'icon' => "icon-group"),
             array('idMenu' => 9, 'link' => "../motoboy/main.php", 'title' => "Moto boy", 'icon' => "icon-bicycle"),
             array('idMenu' => 10, 'link' => "javascript:;;", 'title' => "Atendimento", 'icon' => "icon-comment"),
-            //array('idMenu' => 6, 'link' => "../newsletter/main.php", 'title' => "Newsletter", 'icon' => "icon-globe"),	
+            array('idMenu' => 6, 'link' => "javascript;;", 'title' => "Solicitacao", 'icon' => "icon-inbox"),	
 			//array('idMenu' => 2, 'link' => "../config/main.php", 'title' => "Configurações", 'icon' => "icon-cog"),
 			array('idMenu' => 2, 'link' => "javascript:;;", 'title' => "Configurações", 'icon' => "icon-cog"),
         );
@@ -32,6 +32,11 @@
 			2 => array(
                 array('link' => "../config/main.php", 'title' => "Globais"),
                 array('link' => "../categoria/main.php", 'title' => "Categorias"),
+            ),
+            6 => array(
+                array('link' => "../solicitacao/alocar.php", 'title' => "Alocar Motoboy"),
+                array('link' => "../solicitacao/finalizar.php", 'title' => "Finalizar Solicitação"),
+                array('link' => "../solicitacao/main.php", 'title' => "Solicitacoes"),
             ),
         );
 

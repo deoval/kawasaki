@@ -1,6 +1,6 @@
 <?php
 
-class Cliente {
+class Cliente_old {
 
     private $tabela = "cliente";
     private $id_cliente;

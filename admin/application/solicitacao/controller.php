@@ -74,7 +74,7 @@ try {
         }
 
         $arrayCliente = SqlCliente::_lista($filtro, $listLimit, $sidx . " " . $sord);
-        
+
         $response = array(
             'page' => $page,
             'totalPages' => $totalPages,

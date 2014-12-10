@@ -1,6 +1,6 @@
 <?php
 
-class Motoboy {
+class Motoboy{
 
     private $tabela = "motoboy";
     private $id_motoboy;
