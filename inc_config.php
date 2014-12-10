@@ -1,4 +1,6 @@
 <?php
+include('site/vendor/autoload.php');
+include('site/config/database.php');
 header("Content-type: text/html; charset=utf-8");
 date_default_timezone_set("America/Sao_Paulo");
 ini_set('allow_url_fopen', 1);

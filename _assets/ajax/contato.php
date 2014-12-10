@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 ob_start();
 if(($_POST['email'] != '') and ($_POST['nome'] != '')){
 	
@@ -7,8 +7,8 @@ if(($_POST['email'] != '') and ($_POST['nome'] != '')){
 	$email =  $_POST['email'];
 	$mensagem = $_POST['mensagem'];
 	$corpo = '';
-	$emailsender = "empresas@anb.net.br";
-	$to = 'leonardo.schenfeld@gmail.com';
+	$emailsender = $email;
+	$to = "james_wjr@hotmail.com";
 	$headers  = "MIME-Version: 1.0\r\n";
 	$headers .= "Content-type: text/html; charset=utf-8\r\n";
 	$headers .= "From: $emailsender\r\n";
