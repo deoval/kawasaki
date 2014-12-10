@@ -8,7 +8,23 @@ $menu = 6;
 $title = 'Solicitações';
 $titleIcon = 'icon-inbox';
 
-$solicitacoes = SolicitacaoE::join('cliente as c', 's.id_cliente', '=', 'c.id_cliente')
+$motoboys = MotoboyE::all();
+
+if (isset($_POST['filtro']) && $_POST['filtro'] != '' ) {
+  $filtro = $_POST['filtro'];  
+  $solicitacoes = SolicitacaoE::join('cliente as c', 's.id_cliente', '=', 'c.id_cliente')
+->join( 'solicitacao_endereco as seb', 'seb.id_solicitacao_endereco', '=', 's.id_solicitacao_endereco_busca')
+->join( 'solicitacao_endereco as see', 'see.id_solicitacao_endereco', '=', 's.id_solicitacao_endereco_entrega')
+->from('solicitacao as s')
+->select('c.nome as cliente', 's.id_solicitacao as id',
+'seb.id_solicitacao_endereco as sendbusca_id', 'seb.endereco as enderecoa', 
+'see.id_solicitacao_endereco as sendentrega_id' , 'see.endereco as enderecob')
+->where('s.id_motoboy', '=', 0)
+->where('c.nome', 'LIKE', '%'. $filtro .'%')
+->get(); 
+}
+else{
+  $solicitacoes = SolicitacaoE::join('cliente as c', 's.id_cliente', '=', 'c.id_cliente')
 ->join( 'solicitacao_endereco as seb', 'seb.id_solicitacao_endereco', '=', 's.id_solicitacao_endereco_busca')
 ->join( 'solicitacao_endereco as see', 'see.id_solicitacao_endereco', '=', 's.id_solicitacao_endereco_entrega')
 ->from('solicitacao as s')
@@ -17,8 +33,7 @@ $solicitacoes = SolicitacaoE::join('cliente as c', 's.id_cliente', '=', 'c.id_cl
 'see.id_solicitacao_endereco as sendentrega_id' , 'see.endereco as enderecob')
 ->where('s.id_motoboy', '=', 0)
 ->get();
-
-$motoboys = MotoboyE::all();
+}
 
 ?>
 <!DOCTYPE html>
@@ -47,7 +62,21 @@ $motoboys = MotoboyE::all();
                                 <i class="<?php echo $titleIcon ?>"></i>
                                 <h3><?php echo $title ?></h3>
                             </div> <!-- /.widget-header -->                            
-                                    
+                             
+                            <div class="widget-content">
+                              <br />
+                              <section>
+
+                                      <form class="form-horizontal col-md-4" id="filtroCliente" name="filtroCliente" method="POST">
+                                        <div class="form-group">
+                                            <div class="col-md-9">
+                                                <input class="form-control form-search" name="filtro" type="text" placeholder="Pesquisar por cliente">
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                        <input type="submit" value="" style="visibility: hidden;" />
+                                    </form>
 
                                     <table id="grid-cliente" class="grid-lista">
                                         <thead>
@@ -108,7 +137,6 @@ $motoboys = MotoboyE::all();
             var itemSelecionado = e.options[e.selectedIndex].value;
             location.href='alocarMotoboy.php?id=' + id + '&motoboy=' + itemSelecionado;
         };    
-    
         </script>
     </body>
 </html>
