@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('.main').height(window.innerHeight-300);
+    //$('.main').height(window.innerHeight-7000);
     if ($('.input-datepicker').length > 0) {
         $('.input-datepicker').datepicker().on('changeDate', function (ev) {
             $(this).datepicker('hide');
