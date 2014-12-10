@@ -84,8 +84,8 @@ else{
                                               <td class="col-md-4">Nome do cliente</td>
                                               <td class="col-md-2">Endereço de busca</td>
                                               <td class="col-md-2">Endereço de entrega</td>
-                                              <td class="col-md-2">Ativo</td>
                                               <td class="col-md-2">Motoboy</td>
+                                              <td class="col-md-2"></td>
                                           </tr>  
                                         </thead>
                                         <tbody>
