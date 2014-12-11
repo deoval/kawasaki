@@ -6,6 +6,9 @@ $nome = isset($session_nome) && !empty($session_nome) ? $session_nome : "";
 
 $session_email = $_SESSION['site'][_EMPRESA_]['cliente']["email"];
 $email = isset($session_email) && !empty($session_email) ? $session_email : "";
+
+$objconfig = new Config();
+$destinatario = $objconfig->_lista(array(  item =>  "item = 'destinatario_fale_cliente'"),"","")[0]['value'];
 ?>
 
 
@@ -41,7 +44,7 @@ $email = isset($session_email) && !empty($session_email) ? $session_email : "";
                                         <div class="widget-content">  
                                         <h4>Fale Conosco</h4>
                                         <form action="<?php echo GLOBAL_PATH; ?>_assets/ajax/contato.php" class="form-horizontal col-md-7" id="formContato" >
-                                            
+                                            <input type="hidden" name="destinatario" id="destinatario" value = "<?php echo $destinatario ?>"/>
                                             <div class="form-group">                                            
                                                 <label for="nome" class="col-md-4">Nome</label>
                                                 <div class="col-md-8">

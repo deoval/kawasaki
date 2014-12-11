@@ -1,5 +1,8 @@
 <?php 
     include_once('inc/header.php');
+	
+	$objconfig = new Config();
+	$destinatario = $objconfig->_lista(array(  item =>  "item = 'destinatario_contato_home'"),"","")[0]['value'];
  ?>
         <main id="home">
 
@@ -52,6 +55,7 @@
                     <h4>ENTRE EM CONTATO</h4>
                     <span class="separator"></span>
                     <form action="<?php echo GLOBAL_PATH; ?>_assets/ajax/contato.php" id="formContato" >
+						<input type="hidden" name="destinatario" id="destinatario" value = "<?php echo $destinatario ?>"/>
                         <input type="text" data-validate name="nome"  data placeholder="Name">
                         <input type="text" data-validate name="email" placeholder="E-mail"> 
                         <textarea name="mensagem" id="" placeholder="Message"></textarea>

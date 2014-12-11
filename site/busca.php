@@ -205,7 +205,7 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
 						<option value="0">selecione</option>
 						<?php 
 						
-						$categorias = Categoria::_lista("","","");
+						$categorias = Categoria::_lista(array("disponivel" => "disponivel=1"),"","");
 						
 						foreach ($categorias as $dado){ ?>
 							

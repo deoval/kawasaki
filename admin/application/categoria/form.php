@@ -57,7 +57,27 @@ $objCategoria = new SqlCategoria($id_categoria);
                                         <div class="form-group">											
                                             <label for="custo_adicional" class="col-md-4">Custo Adicional</label>
                                             <div class="col-md-8">
-                                                <input type="text" class="form-control" name="<?php echo $objCategoria->tabela; ?>[custo_adicional]" id="custo_adicional" value="<?php echo $objCategoria->custo_adicional; ?>">
+                                                <input type="text" data-mask="moeda" class="form-control" name="<?php echo $objCategoria->tabela; ?>[custo_adicional]" id="custo_adicional" value="<?php echo str_replace(".",",",$objCategoria->custo_adicional); ?>">
+                                                <p class="help-block"></p>
+                                            </div> <!-- /controls -->				
+                                        </div> <!-- /control-group -->
+										
+										<div class="form-group">											
+                                            <label for="custo_adicional" class="col-md-4">Disponível</label>
+                                            <div class="col-md-8">
+												<select class="form-control" name="<?php echo $objCategoria->tabela; ?>[disponivel]" id="disponivel" >
+												<?php if($objCategoria->disponivel==0) {?>
+													<option value="1">Sim</option>
+													<option value="0" selected>Não</option>
+												<?php
+													}
+													else 
+													{
+													?>
+													<option value="1" selected>Sim</option>
+													<option value="0">Não</option>
+												<?php }?>
+												</select>
                                                 <p class="help-block"></p>
                                             </div> <!-- /controls -->				
                                         </div> <!-- /control-group -->

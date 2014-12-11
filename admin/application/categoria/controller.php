@@ -122,7 +122,7 @@ try {
 
 //Ajustado para cadastro ou edição
     if (isset($_POST['cmd']) && $_POST['cmd'] == 'salvar') {
-
+		$_POST['categoria']['custo_adicional']=str_replace(",",".",str_replace ( "." , "" , $_POST['categoria']['custo_adicional'] ));
         $objCategoria = new SqlCategoria((int) $_POST['categoria']['id_categoria']);
 
         $objCategoria->Prepare($_POST['categoria']);
