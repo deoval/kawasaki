@@ -73,6 +73,12 @@ Selecione o período:
 </div><input type="submit" name="btnmesok" class="animate" id="btnmesok" value="Ok"/>
 </form>
 <br>
+<form method="post" action="<?php echo GLOBAL_PATH; ?>relatorio_impressao" name="fexcel" id="fexcel">
+<input type="hidden" name="mq" value="<?php echo $_POST['mq'] ?>"/>
+<input type="hidden" name="a" value="0"/>
+<input type="submit" name="Excel" class="animate" id="Excel" value="Exportar para Excel"/>
+</form>
+<br>
 <table class="table-striped table-hover" style="clear:both">
   		<thead>
    			 <tr>
