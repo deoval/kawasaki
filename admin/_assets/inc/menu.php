@@ -36,6 +36,8 @@
             6 => array(
                 array('link' => "../solicitacao/alocar.php", 'title' => "Alocar Motoboy"),
                 array('link' => "../solicitacao/finalizar.php", 'title' => "Finalizar Solicitação"),
+                array('link' => "../solicitacao/relatoriocliente.php", 'title' => "Relatório - Cliente"),
+                array('link' => "../solicitacao/relatoriomotoboy.php", 'title' => "Relatório - Motoboy"),				
             ),
         );
 
