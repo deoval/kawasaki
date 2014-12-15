@@ -1,6 +1,6 @@
 <?php
 
-class Cliente {
+class Cliente{
 
     private $tabela = "cliente";
     private $id_cliente;
@@ -18,9 +18,10 @@ class Cliente {
     private $complemento;
     private $bairro;
     private $cidade;
+    private $cod_verificacao;
 
     public function __construct() {
-        
+
     }
 
     public function getTabela() {
@@ -145,6 +146,14 @@ class Cliente {
     
     public function setCidade($cidade) {
         $this->cidade = $cidade;
+    }
+
+     public function getCod_verificacao() {
+        return $this->cod_verificacao;
+    }
+
+    public function setCod_verificacao($cod_verificacao) {
+        $this->cod_verificacao = $cod_verificacao;
     }
 }
 
