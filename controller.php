@@ -49,14 +49,41 @@ try {
         $senhaBkp = $_POST['cliente']["senha"] != "" ? md5($_POST['cliente']["senha"]) : $objCliente->senha;
         $_POST['cliente']["senha"] = $senhaBkp;
 
-        $objCliente->Prepare($_POST['cliente']);
+        $basic = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+ 
+        $validacao = "";
+ 
+        for($count= 0; 20 > $count; $count++){
+            //Gera um caracter aleatorio
+            $validacao.= $basic[rand(0, strlen($basic) - 1)];
+        }
+ 
+        $objCliente->cod_verificacao = $validacao;
 
+        $objCliente->Prepare($_POST['cliente']);
         if (!$_POST['cliente']['id_cliente']) {
             $objCliente->Cadastra();
 
             $_SESSION['site'][_EMPRESA_]['cliente']["id_cliente"] = $objCliente->id_cliente;
             $_SESSION['site'][_EMPRESA_]['cliente']["nome"] = $objCliente->nome;
             $_SESSION['site'][_EMPRESA_]['cliente']["email"] = $objCliente->email;
+
+
+            $content = http_build_query(array(
+                'email' => $objCliente->email,
+                'nome' => $objCliente->nome,
+                'cod' => $objCliente->cod_verificacao,
+            ));
+              
+            $context = stream_context_create(array(
+                'http' => array(
+                    'method'  => 'POST',
+                    'content' => $content,
+                )
+            ));
+              
+            $result = file_get_contents( GLOBAL_PATH . 'ativacao.php', null, $context);
+
         } else {
             $objCliente->Edita();
         }
