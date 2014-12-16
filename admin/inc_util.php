@@ -9,7 +9,7 @@
                 <h4 class="modal-title">Deseja realmente excluir?</h4>
             </div>
             <div class="modal-footer" style='border-top: none;'>
-                <button type="button" class="btn btn-flat default btn-modal-deletar"> Sim </button>
+                <button id="modaldeletar" onclick="" type="button" class="btn btn-flat default btn-modal-deletar"> Sim </button>
                 <button type="button" class="btn btn-flat success" data-dismiss="modal"> Não </button>
             </div>
         </div><!-- /.modal-content -->

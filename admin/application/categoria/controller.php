@@ -103,20 +103,12 @@ try {
 
 
 //Exclui fotos, arquivos, e a propria públicação
-    if (isset($_GET["cmd"]) && $_GET["cmd"] == "excluir") {
-        $objCategoria = new SqlCategoria((int) $_GET["id"]);
-
-        if ($objCategoria->imagem != "") {
-            foreach ($arrayIMG as $arrIMG)
-                @unlink(LOCAL_ARQ . $arrIMG["prefix"] . $objCategoria->imagem);
-        }
-
-        $objCategoria->Exclui((int) $_GET["id"]);
-        Util::_jsCall("
-            parent.Categoria.closeForm(" . (int) $_GET["id"] . ");
-        ");
-
-        exit();
+    if (isset($_POST["cmd"]) && $_POST["cmd"] == "excluir") {
+        $objCategoria = new SqlCategoria((int) $_POST["id"]);
+		
+        $objCategoria->Exclui((int) $_POST["id"]);
+		
+        echo json_encode('ok');
     }
 
 

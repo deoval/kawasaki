@@ -125,20 +125,14 @@ try {
 
 
 //Exclui fotos, arquivos, e a propria públicação
-    if (isset($_GET["cmd"]) && $_GET["cmd"] == "excluir") {
-        $objMotoboy = new SqlMotoboy((int) $_GET["id"]);
+    if (isset($_POST["cmd"]) && $_POST["cmd"] == "excluir") {
+        $objMotoboy = new SqlMotoboy((int) $_POST["id"]);
 
-        if ($objMotoboy->imagem != "") {
-            foreach ($arrayIMG as $arrIMG)
-                @unlink(LOCAL_ARQ . $arrIMG["prefix"] . $objMotoboy->imagem);
-        }
 
-        $objMotoboy->Exclui((int) $_GET["id"]);
-        Util::_jsCall("
-            parent.Motoboy.closeForm(" . (int) $_GET["id"] . ");
-        ");
+        $objMotoboy->Exclui((int) $_POST["id"]);
 
-        exit();
+
+        echo json_encode('ok');
     }
 
 

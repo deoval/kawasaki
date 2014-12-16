@@ -31,7 +31,7 @@ var Categoria = {
                         }
                         tableHtml += '<td class="align-right">';
                         tableHtml += '<a class="btn btn-info" href="../categoria/form.php?ID=' + data.rows[indexTr].id + '"><i class="icon-pencil"></i></a>';
-                        tableHtml += '<a class="btn btn-danger btn-deletar" data-toggle="modal" href="#modal-trash"><i class="icon-trash"></i></a>';
+                        tableHtml += '<a class="btn btn-danger btn-deletar" data-toggle="modal" href="#modal-trash" onClick="Categoria.modaldeletarattr(' + data.rows[indexTr].id + ')"><i class="icon-trash"></i></a>';
                         tableHtml += '</td>';
 
                         tableHtml += '</tr>';
@@ -114,8 +114,24 @@ var Categoria = {
             });
         }
     },
+    'modaldeletarattr': function(id) {
+        $('#modaldeletar').attr('onClick', 'Categoria.deleta('+ id +')');
+		
+    },
     'deleta': function(id) {
-        $('#actionFrame').attr('src', '../categoria/controller.php?cmd=excluir&id=' + id);
+			var dataCategoria = 'cmd=excluir&id='+ id;
+            $.ajax({
+            url: "../categoria/controller.php",
+            type: "POST",
+            data: dataCategoria,
+            dataType: "json",
+            success: function(data) {
+                window.location.reload();
+			},
+            error: function() {
+            }
+        });
+		
     },
     'valida': function(form)
     {

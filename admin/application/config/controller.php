@@ -103,20 +103,13 @@ try {
 
 
 //Exclui fotos, arquivos, e a propria públicação
-    if (isset($_GET["cmd"]) && $_GET["cmd"] == "excluir") {
-        $objConfig = new SqlConfig((int) $_GET["id"]);
+    if (isset($_POST["cmd"]) && $_POST["cmd"] == "excluir") {
+        $objConfig = new SqlConfig((int) $_POST["id"]);
 
-        if ($objConfig->imagem != "") {
-            foreach ($arrayIMG as $arrIMG)
-                @unlink(LOCAL_ARQ . $arrIMG["prefix"] . $objConfig->imagem);
-        }
+        $objConfig->Exclui((int) $_POST["id"]);
 
-        $objConfig->Exclui((int) $_GET["id"]);
-        Util::_jsCall("
-            parent.Config.closeForm(" . (int) $_GET["id"] . ");
-        ");
+        echo json_encode('ok');
 
-        exit();
     }
 
 

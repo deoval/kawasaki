@@ -31,7 +31,7 @@ var Config = {
                         }
                         tableHtml += '<td class="align-right">';
                         tableHtml += '<a class="btn btn-info" href="../config/form.php?ID=' + data.rows[indexTr].id + '"><i class="icon-pencil"></i></a>';
-                        tableHtml += '<a class="btn btn-danger btn-deletar" data-toggle="modal" href="#modal-trash"><i class="icon-trash"></i></a>';
+                        tableHtml += '<a class="btn btn-danger btn-deletar" data-toggle="modal" href="#modal-trash" onClick="Config.modaldeletarattr(' + data.rows[indexTr].id + ')"><i class="icon-trash"></i></a>';
                         tableHtml += '</td>';
 
                         tableHtml += '</tr>';
@@ -114,8 +114,24 @@ var Config = {
             });
         }
     },
+    'modaldeletarattr': function(id) {
+        $('#modaldeletar').attr('onClick', 'Config.deleta('+ id +')');
+		
+    },
     'deleta': function(id) {
-        $('#actionFrame').attr('src', '../config/controller.php?cmd=excluir&id=' + id);
+			var dataConfig = 'cmd=excluir&id='+ id;
+            $.ajax({
+            url: "../config/controller.php",
+            type: "POST",
+            data: dataConfig,
+            dataType: "json",
+            success: function(data) {
+                window.location.reload();
+			},
+            error: function() {
+            }
+        });
+		
     },
     'valida': function(form)
     {
