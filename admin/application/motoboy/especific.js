@@ -142,6 +142,25 @@ var Motoboy = {
             return false;
         }
 
+        if ($('#cpf', '#' + form).val() == "")
+        {
+            alert('Você precisa preencher o campo cpf! ');
+            $('#cpf', '#' + form).focus();
+            return false;
+        }
+        if ($('#rg', '#' + form).val() == "")
+        {
+            alert('Você precisa preencher o campo rg! ');
+            $('#rg', '#' + form).focus();
+            return false;
+        }
+        if ($('#placa', '#' + form).val() == "")
+        {
+            alert('Você precisa preencher o campo placa! ');
+            $('#placa', '#' + form).focus();
+            return false;
+        }
+
         //lib.js
         if (!validaEmail($('#email', '#' + form).val()))
         {

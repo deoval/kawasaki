@@ -139,6 +139,23 @@ try {
 //Ajustado para cadastro ou edição
     if (isset($_POST['cmd']) && $_POST['cmd'] == 'salvar') {
 
+       /*$_POST['motoboy'] = array(
+
+        'email' => 't@t.com', 
+        'cpf' => '21231321321', 
+        'rg' => '15454213', 
+        'placa' => 'kgk-1233',
+         
+        ); */
+
+
+        if (Util::_isEmpty($_POST['motoboy']["email"]) 
+            || Util::_isEmpty($_POST['motoboy']["cpf"]) 
+            || Util::_isEmpty($_POST['motoboy']["rg"]) 
+            || Util::_isEmpty($_POST['motoboy']["placa"]))
+            throw new Exception('Os campos email, cpf, rg e placa não podem ser vazios');
+
+
         if (!Util::_isEmpty($_POST['motoboy']["email"]) && SqlMotoboy::_checkEmail($_POST['motoboy']["email"], $_POST['motoboy']['id_motoboy']) > 0)
             throw new Exception('Este e-mail já existe em nossa base!');
 
@@ -160,6 +177,7 @@ try {
         $_POST['motoboy']['cep'] = $geo['cep'];
         $_POST['motoboy']['lat'] = $geo['lat'];
         $_POST['motoboy']['lng'] = $geo['lng'];
+        
 
         $senhaBkp = $_POST['motoboy']["senha"] != "" ? md5($_POST['motoboy']["senha"]) : $objMotoboy->senha;
         $_POST['motoboy']["senha"] = $senhaBkp;
@@ -167,9 +185,9 @@ try {
         $_POST['motoboy']['data_nascimento'] = DataHora::DatePtToDateMysql($_POST['motoboy']['data_nascimento']);
 
         $objMotoboy->Prepare($_POST['motoboy']);
+       
 
-
-        if ($_FILES['imagem']['error'] == 0) {
+       if ($_FILES['imagem']['error'] == 0) {
 
             $ex = array_reverse(explode(".", $_FILES['imagem']['name']));
 
@@ -182,7 +200,7 @@ try {
                 $objMotoboy->imagem = md5(microtime()) . "." . $ex[0];
             }
         }
-
+        
         if (!isset($_POST['motoboy']["ativo"]))
             $objMotoboy->ativo = 0;
 
@@ -220,7 +238,7 @@ function geocode($endereco) {
     $json = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address=' . $endereco . '&language=pt-BR&sensor=true');
     $aJson = json_decode($json);
     
-    if($aJson->status != 'OK') die('Erro');
+    if($aJson->status != 'OK') echo 'erro';//die('Erro');
     
     $dados = array (
         'numero' => $aJson->results[0]->address_components[0]->long_name,
