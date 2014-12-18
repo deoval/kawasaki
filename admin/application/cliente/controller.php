@@ -118,20 +118,12 @@ try {
 
 
 //Exclui fotos, arquivos, e a propria públicação
-    if (isset($_GET["cmd"]) && $_GET["cmd"] == "excluir") {
-        $objCliente = new SqlCliente((int) $_GET["id"]);
+    if (isset($_POST["cmd"]) && $_POST["cmd"] == "excluir") {
+        $objCliente = new SqlCliente((int) $_POST["id"]);
 
-        if ($objCliente->imagem != "") {
-            foreach ($arrayIMG as $arrIMG)
-                @unlink(LOCAL_ARQ . $arrIMG["prefix"] . $objCliente->imagem);
-        }
+        $objCliente->Exclui((int) $_POST["id"]);
 
-        $objCliente->Exclui((int) $_GET["id"]);
-        Util::_jsCall("
-            parent.Cliente.closeForm(" . (int) $_GET["id"] . ");
-        ");
-
-        exit();
+        echo json_encode('ok');
     }
 
 

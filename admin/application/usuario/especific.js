@@ -31,7 +31,7 @@ var Usuario = {
                         }
                         tableHtml += '<td class="align-right">';
                         tableHtml += '<a class="btn btn-info" href="../usuario/form.php?ID=' + data.rows[indexTr].id + '"><i class="icon-pencil"></i></a>';
-                        tableHtml += '<a class="btn btn-danger btn-deletar" data-toggle="modal" href="#modal-trash"><i class="icon-trash"></i></a>';
+                        tableHtml += '<a class="btn btn-danger btn-deletar" data-toggle="modal" href="#modal-trash" onClick="Usuario.modaldeletarattr(' + data.rows[indexTr].id + ')"><i class="icon-trash"></i></a>';
                         tableHtml += '</td>';
 
                         tableHtml += '</tr>';
@@ -114,8 +114,24 @@ var Usuario = {
             });
         }
     },
+    'modaldeletarattr': function(id) {
+        $('#modaldeletar').attr('onClick', 'Usuario.deleta('+ id +')');
+		
+    },
     'deleta': function(id) {
-        $('#actionFrame').attr('src', '../usuario/controller.php?cmd=excluir&id=' + id);
+			var dataUsuario = 'cmd=excluir&id='+ id;
+            $.ajax({
+            url: "../usuario/controller.php",
+            type: "POST",
+            data: dataUsuario,
+            dataType: "json",
+            success: function(data) {
+                window.location.reload();
+			},
+            error: function() {
+            }
+        });
+		
     },
     'valida': function(form)
     {

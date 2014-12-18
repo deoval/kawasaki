@@ -131,20 +131,14 @@ try {
 
 
 //Exclui fotos, arquivos, e a propria públicação
-    if (isset($_GET["cmd"]) && $_GET["cmd"] == "excluir") {
-        $objUsuario = new SqlUsuario((int) $_GET["id"]);
+    if (isset($_POST["cmd"]) && $_POST["cmd"] == "excluir") {
+        $objUsuario = new SqlUsuario((int) $_POST["id"]);
 
-        if ($objUsuario->imagem != "") {
-            foreach ($arrayIMG as $arrIMG)
-                @unlink(LOCAL_ARQ . $arrIMG["prefix"] . $objUsuario->imagem);
-        }
 
-        $objUsuario->Exclui((int) $_GET["id"]);
-        Util::_jsCall("
-            parent.Usuario.closeForm(" . (int) $_GET["id"] . ");
-        ");
+        $objUsuario->Exclui((int) $_POST["id"]);
 
-        exit();
+
+        echo json_encode('ok');
     }
 
 
