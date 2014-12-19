@@ -101,8 +101,8 @@ $clientes = ClienteE::from('cliente')
 												</select>
 											</div>
 											<div class="col-md-7" style="margin-bottom: 10px">
-												<input type="submit" name="btnmesok" class="animate" id="btnmesok" value="Ok"/>
-											</div>
+												<input type="submit" name="btnmesok" class="animate btn btn-default" id="btnmesok" value="Ok"/>                                                                 
+                      </div>
                                         </div>
                                     </form>       
 

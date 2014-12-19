@@ -72,10 +72,13 @@ else{
                                             <div class="col-md-9">
                                                 <input class="form-control form-search" name="filtro" type="text" placeholder="Pesquisar por cliente">
                                             </div>
+                                            <div class="col-md-3">
+                                                <input type="submit" value="Ok" class="btn btn-default"/>                                                   
+                                            </div> 
                                             
                                         </div>
                                         
-                                        <input type="submit" value="" style="visibility: hidden;" />
+                                        
                                     </form>
 
                                     <table id="grid-cliente" class="grid-lista">

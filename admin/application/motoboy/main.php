@@ -39,7 +39,7 @@ $titleIcon = 'icon-bicycle';
                                 <section>
                                     <form class="form-horizontal col-md-4" id="filtroMotoboy" name="filtroMotoboy" onsubmit="Motoboy.lista(0);return false">
                                         <div class="form-group">
-                                            <div class="col-md-9">
+                                            <div class="col-md-6">
                                                 <input class="form-control form-search" name="filtro[nome]" type="text" placeholder="Pesquisar...">
                                             </div>
                                             <div class="col-md-3">
@@ -49,10 +49,12 @@ $titleIcon = 'icon-bicycle';
                                                     <option value="null">Todos</option>
                                                 </select>
                                             </div>
+                                            <div class="col-md-3">
+                                                <input type="submit" value="Ok" class="btn btn-default"/>                                                   
+                                            </div> 
                                         </div>
                                         <input type="hidden" id="sidx" name="sidx" value="nome"/>
                                         <input type="hidden" id="sord" name="sord" value="ASC"/>
-                                        <input type="submit" value="" style="visibility: hidden;" />
                                     </form>
                                     
                                     <div class="pull-right col-md-2">
