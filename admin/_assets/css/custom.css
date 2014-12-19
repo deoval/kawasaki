@@ -51,6 +51,7 @@ Assigned to:	You
 .grid-lista tbody tr:nth-child(odd){
 	border: 1px solid #D5D5D5;
 	background-image: -webkit-gradient(linear, left 0%, left 100%, from(#414141), to(#323232));
+	background-image: linear-gradient(to bottom, #414141 0%, #323232 100%);
 	color:#fff;
 }
 .grid-lista tbody td.align-right a{
