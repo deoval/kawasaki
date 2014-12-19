@@ -42,6 +42,11 @@ include_once('./site/inc/header.php');
             </tr>
             <tr>
                 <td colspan="2">
+                    <input type="text" name="cliente[empresa]" id="empresa" data-mask="empresa" placeholder="Empresa"/>
+                </td>
+            </tr>			
+            <tr>
+                <td colspan="2">
                     <input type="text" name="cliente[telefone]" id="telefone" data-mask="telefone" placeholder="Telefone"/>
                 </td>
             </tr>

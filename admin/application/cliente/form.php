@@ -77,6 +77,14 @@ $objCliente = new SqlCliente($id_cliente);
                                                 <p class="help-block"></p>
                                             </div> <!-- /controls -->				
                                         </div> <!-- /control-group -->
+										
+                                        <div class="form-group">											
+                                            <label for="empresa" class="col-md-4">Empresa</label>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" name="<?php echo $objCliente->tabela; ?>[empresa]" id="empresa" value="<?php echo $objCliente->empresa; ?>" data-mask="empresa">
+                                                <p class="help-block"></p>
+                                            </div> <!-- /controls -->				
+                                        </div> <!-- /control-group -->										
 
                                         <div class="form-group">											
                                             <label for="telefone" class="col-md-4">Telefone</label>
@@ -120,6 +128,54 @@ $objCliente = new SqlCliente($id_cliente);
                                                 <p class="help-block"></p>
                                             </div> <!-- /controls -->				
                                         </div> <!-- /control-group -->
+
+										<div class="form-group">											
+                                            <label for="endereco" class="col-md-4">Endereço</label>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" name="<?php echo $objCliente->tabela; ?>[endereco]" id="endereco" value="<?php echo $objCliente->endereco; ?>">
+                                                <p class="help-block"></p>
+                                            </div> <!-- /controls -->				
+                                        </div> <!-- /control-group -->
+										
+										<div class="form-group">											
+                                            <label for="numero" class="col-md-4">Número</label>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" name="<?php echo $objCliente->tabela; ?>[numero]" id="numero" value="<?php echo $objCliente->numero; ?>">
+                                                <p class="help-block"></p>
+                                            </div> <!-- /controls -->				
+                                        </div> <!-- /control-group -->
+										
+										<div class="form-group">											
+                                            <label for="complemento" class="col-md-4">Complemento</label>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" name="<?php echo $objCliente->tabela; ?>[complemento]" id="complemento" value="<?php echo $objCliente->complemento; ?>">
+                                                <p class="help-block"></p>
+                                            </div> <!-- /controls -->				
+                                        </div> <!-- /control-group -->
+										
+										<div class="form-group">											
+                                            <label for="bairro" class="col-md-4">Bairro</label>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" name="<?php echo $objCliente->tabela; ?>[bairro]" id="bairro" value="<?php echo $objCliente->bairro; ?>">
+                                                <p class="help-block"></p>
+                                            </div> <!-- /controls -->				
+                                        </div> <!-- /control-group -->
+										
+										<div class="form-group">											
+                                            <label for="cidade" class="col-md-4">Cidade</label>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" name="<?php echo $objCliente->tabela; ?>[cidade]" id="cidade" value="<?php echo $objCliente->cidade; ?>">
+                                                <p class="help-block"></p>
+                                            </div> <!-- /controls -->				
+                                        </div> <!-- /control-group -->
+																				
+										<div class="form-group">											
+                                            <label for="cep" class="col-md-4">Cep</label>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" name="<?php echo $objCliente->tabela; ?>[cep]" id="cep" value="<?php echo $objCliente->cep; ?>">
+                                                <p class="help-block"></p>
+                                            </div> <!-- /controls -->				
+                                        </div> <!-- /control-group -->										
 
                                         <div class="form-group">
                                             <div class="col-md-offset-4 col-md-8">

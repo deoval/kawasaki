@@ -18,6 +18,7 @@ class Cliente {
 	private $complemento;
 	private $bairro;
 	private $cidade;
+	private $empresa;
 
     public function __construct() {
         
@@ -86,7 +87,11 @@ class Cliente {
 	public function getCidade() {
         return $this->cidade;
     }
-
+	
+	public function getEmpresa() {
+        return $this->empresa;
+    }
+	
     public function setId_cliente($id_cliente) {
         $this->id_cliente = $id_cliente;
     }
@@ -146,6 +151,10 @@ class Cliente {
 	public function setCidade($cidade) {
         $this->cidade = $cidade;
     }
+
+	public function setEmpresa($empresa) {
+        $this->empresa = $empresa;
+    }	
 }
 
 ?>

@@ -12,7 +12,7 @@ $titleIcon = 'icon-inbox';
 if (isset($_POST['filtro']) && $_POST['filtro'] != '' ) {
   $filtro = $_POST['filtro'];  
   $solicitacoes = SolicitacaoE::join('cliente as c', 's.id_cliente', '=', 'c.id_cliente')
-->join( 'motoboy as m', 'm.id_motoboy', '=', 's.id_motoboy')
+->leftjoin( 'motoboy as m', 'm.id_motoboy', '=', 's.id_motoboy')
 ->join( 'solicitacao_endereco as seb', 'seb.id_solicitacao_endereco', '=', 's.id_solicitacao_endereco_busca')
 ->join( 'solicitacao_endereco as see', 'see.id_solicitacao_endereco', '=', 's.id_solicitacao_endereco_entrega')
 ->from('solicitacao as s')
@@ -25,7 +25,7 @@ if (isset($_POST['filtro']) && $_POST['filtro'] != '' ) {
 }
 else{
   $solicitacoes = SolicitacaoE::join('cliente as c', 's.id_cliente', '=', 'c.id_cliente')
-->join( 'motoboy as m', 'm.id_motoboy', '=', 's.id_motoboy')
+->leftjoin( 'motoboy as m', 'm.id_motoboy', '=', 's.id_motoboy')
 ->join( 'solicitacao_endereco as seb', 'seb.id_solicitacao_endereco', '=', 's.id_solicitacao_endereco_busca')
 ->join( 'solicitacao_endereco as see', 'see.id_solicitacao_endereco', '=', 's.id_solicitacao_endereco_entrega')
 ->from('solicitacao as s')

@@ -13,7 +13,7 @@ $mes = isset($_POST['mes'])? $_POST['mes'] : 0;
 
 if ($id_motoboy != 0 ) {
   $solicitacoes = SolicitacaoE::join('cliente as c', 's.id_cliente', '=', 'c.id_cliente')
-->join( 'motoboy as m', 'm.id_motoboy', '=', 's.id_motoboy')
+->leftjoin( 'motoboy as m', 'm.id_motoboy', '=', 's.id_motoboy')
 ->join( 'solicitacao_endereco as seb', 'seb.id_solicitacao_endereco', '=', 's.id_solicitacao_endereco_busca')
 ->join( 'solicitacao_endereco as see', 'see.id_solicitacao_endereco', '=', 's.id_solicitacao_endereco_entrega')
 ->from('solicitacao as s')
@@ -26,7 +26,7 @@ if ($id_motoboy != 0 ) {
 }
 else{
   $solicitacoes = SolicitacaoE::join('cliente as c', 's.id_cliente', '=', 'c.id_cliente')
-->join( 'motoboy as m', 'm.id_motoboy', '=', 's.id_motoboy')
+->leftjoin( 'motoboy as m', 'm.id_motoboy', '=', 's.id_motoboy')
 ->join( 'solicitacao_endereco as seb', 'seb.id_solicitacao_endereco', '=', 's.id_solicitacao_endereco_busca')
 ->join( 'solicitacao_endereco as see', 'see.id_solicitacao_endereco', '=', 's.id_solicitacao_endereco_entrega')
 ->from('solicitacao as s')

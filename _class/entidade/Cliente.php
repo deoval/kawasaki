@@ -19,6 +19,7 @@ class Cliente{
     private $bairro;
     private $cidade;
     private $cod_verificacao;
+	private $empresa;
 
     public function __construct() {
 
@@ -87,6 +88,14 @@ class Cliente{
     public function getCidade() {
         return $this->cidade;
     }
+	
+	public function getCod_verificacao() {
+        return $this->cod_verificacao;
+    }
+	
+	public function getEmpresa() {
+        return $this->empresa;
+    }
 
     public function setId_cliente($id_cliente) {
         $this->id_cliente = $id_cliente;
@@ -148,13 +157,13 @@ class Cliente{
         $this->cidade = $cidade;
     }
 
-     public function getCod_verificacao() {
-        return $this->cod_verificacao;
-    }
-
     public function setCod_verificacao($cod_verificacao) {
         $this->cod_verificacao = $cod_verificacao;
     }
+	
+    public function setEmpresa($empresa) {
+        $this->empresa = $empresa;
+    }	
 }
 
 ?>

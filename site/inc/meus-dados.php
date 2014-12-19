@@ -18,7 +18,7 @@ if (isset($_POST['cmd']) && $_POST['cmd'] == "salvar"){
                 
                 if($key == "nome" || $key == "email" || $key == "cpf" || $key == "cnpj" || $key == "telefone" || $key == "endereco" 
                     || $key == "bairro" || $key == "cep" || $key == "numero" || $key == "complemento" 
-                    || $key == "cidade")  $updateCliente->$key = $value;
+                    || $key == "cidade" || $key == "empresa")  $updateCliente->$key = $value;
                 
                 if ($key == "senha" && ! empty($value)) {
                     $updateCliente->$key = md5($value);
@@ -93,6 +93,14 @@ if (isset($_POST['cmd']) && $_POST['cmd'] == "salvar"){
                                                 <p class="help-block"></p>
                                             </div> <!-- /controls -->				
                                         </div> <!-- /control-group -->
+										
+                                        <div class="form-group">											
+                                            <label for="empresa" class="col-md-4">Empresa/Filial</label>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" name="<?php echo $objCliente->tabela; ?>empresa" id="empresa" value="<?php echo $objCliente->empresa; ?>" data-mask="empresa">
+                                                <p class="help-block"></p>
+                                            </div> <!-- /controls -->				
+                                        </div> <!-- /control-group -->										
 
                                         <div class="form-group">											
                                             <label for="telefone" class="col-md-4">Telefone</label>
