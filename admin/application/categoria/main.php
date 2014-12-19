@@ -82,6 +82,7 @@ $titleIcon = 'icon-cog';
 
                                         </tbody>
                                     </table>
+									<div id="pagination-categoria" class="list-inline"></div>
 
 
                                 </section>

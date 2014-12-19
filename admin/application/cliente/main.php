@@ -79,7 +79,7 @@ $titleIcon = 'icon-group';
                                             
                                         </tbody>
                                     </table>
-
+									<div id="pagination-cliente" class="list-inline"></div>
 
                                 </section>
                             </div> <!-- /widget-content -->

@@ -7,7 +7,8 @@
                 <span class="sr-only">Toggle navigation</span>
                 <i class="icon-cog"></i>
             </button>
-            <a class="navbar-brand" href="javascript:;;"><img src="<?php echo ADMIN_PATH; ?>_assets/img/logoAmatriz.png" border="0" /></a>
+            <!-- <a class="navbar-brand" href="javascript:;;"><img src="<?php echo ADMIN_PATH; ?>_assets/img/logoAmatriz.png" border="0" /></a> -->
+			<h1 style="color: #fff;"><strong>Painel <br>Administrativo</strong></h1>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->

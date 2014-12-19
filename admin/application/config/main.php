@@ -82,7 +82,7 @@ $titleIcon = 'icon-cog';
 
                                         </tbody>
                                     </table>
-
+									<div id="pagination-config" class="list-inline"></div>
 
                                 </section>
                             </div> <!-- /widget-content -->

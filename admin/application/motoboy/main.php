@@ -81,6 +81,7 @@ $titleIcon = 'icon-bicycle';
                                             
                                         </tbody>
                                     </table>
+									<div id="pagination-motoboy" class="list-inline"></div>
 
 
                                 </section>

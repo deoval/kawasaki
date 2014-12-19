@@ -14,21 +14,21 @@
         <ul class="mainnav">
         <?php
         $arrayMenu = array(
-            array('idMenu' => 1, 'link' => "../dashboard/main.php", 'title' => "Dashboard", 'icon' => "icon-home"),
+            //array('idMenu' => 1, 'link' => "../dashboard/main.php", 'title' => "Dashboard", 'icon' => "icon-home"),
             array('idMenu' => 4, 'link' => "javascript:;;", 'title' => "Textos", 'icon' => "icon-quote-right"),
             array('idMenu' => 7, 'link' => "../cliente/main.php", 'title' => "Clientes", 'icon' => "icon-group"),
             array('idMenu' => 9, 'link' => "../motoboy/main.php", 'title' => "Moto boy", 'icon' => "icon-bicycle"),
-            array('idMenu' => 10, 'link' => "javascript:;;", 'title' => "Atendimento", 'icon' => "icon-comment"),
+            //array('idMenu' => 10, 'link' => "javascript:;;", 'title' => "Atendimento", 'icon' => "icon-comment"),
             array('idMenu' => 6, 'link' => "javascript;;", 'title' => "Solicitacao", 'icon' => "icon-inbox"),	
 			//array('idMenu' => 2, 'link' => "../config/main.php", 'title' => "Configurações", 'icon' => "icon-cog"),
 			array('idMenu' => 2, 'link' => "javascript:;;", 'title' => "Configurações", 'icon' => "icon-cog"),
         );
 
         $arraySubmenu = array(
-            10 => array(
-                array('link' => "../contato/main.php", 'title' => "Contato"),
-                array('link' => "../telefone/main.php", 'title' => "Telefones"),
-            ),
+            //10 => array(
+            //    array('link' => "../contato/main.php", 'title' => "Contato"),
+            //    array('link' => "../telefone/main.php", 'title' => "Telefones"),
+            //),
 			2 => array(
                 array('link' => "../config/main.php", 'title' => "Globais"),
                 array('link' => "../categoria/main.php", 'title' => "Categorias"),

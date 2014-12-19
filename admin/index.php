@@ -5,7 +5,7 @@ include_once("../inc_config.php");  //Configurações, defines, objetos e classe
 
 
 if (isset($_SESSION[_EMPRESA_]) && is_array($_SESSION[_EMPRESA_]["SYS"]) && isset($_SESSION[_EMPRESA_]["SYS"]["id_usuario"]) && $_SESSION[_EMPRESA_]["SYS"]["id_usuario"] > 0) {
-    header('location: application/dashboard/main.php');
+    header('location: application/solicitacao/alocar.php');
     die();
 }
 ?>
