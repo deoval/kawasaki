@@ -9,9 +9,21 @@ $title = 'Relatório - Cliente';
 $titleIcon = 'icon-inbox';
 
 $id_cliente = isset($_POST['cliente'])? $_POST['cliente'] : 0;  
-$mes = isset($_POST['mes'])? $_POST['mes'] : 0;  
+$mes = isset($_POST['mes'])? $_POST['mes'] : 0;
+$rows = isset($_POST['rows'])? $_POST['rows'] : 10;
 
 if ($id_cliente != 0 ) {
+  $count = SolicitacaoE::join('cliente as c', 's.id_cliente', '=', 'c.id_cliente')
+->leftjoin( 'motoboy as m', 'm.id_motoboy', '=', 's.id_motoboy')
+->join( 'solicitacao_endereco as seb', 'seb.id_solicitacao_endereco', '=', 's.id_solicitacao_endereco_busca')
+->join( 'solicitacao_endereco as see', 'see.id_solicitacao_endereco', '=', 's.id_solicitacao_endereco_entrega')
+->from('solicitacao as s')
+->where('s.ativo', '=', 1)
+->where('c.id_cliente', '=', $id_cliente)
+->count();
+
+$rows = $rows==0 ? $count : $rows;
+
   $solicitacoes = SolicitacaoE::join('cliente as c', 's.id_cliente', '=', 'c.id_cliente')
 ->leftjoin( 'motoboy as m', 'm.id_motoboy', '=', 's.id_motoboy')
 ->join( 'solicitacao_endereco as seb', 'seb.id_solicitacao_endereco', '=', 's.id_solicitacao_endereco_busca')
@@ -22,9 +34,21 @@ if ($id_cliente != 0 ) {
 'see.id_solicitacao_endereco as sendentrega_id' , 'see.endereco as enderecob', 'see.numero as numerob', 'see.bairro as bairrob', 'see.cidade as cidadeb', 's.valor as valor', 's.data')
 ->where('s.ativo', '=', 1)
 ->where('c.id_cliente', '=', $id_cliente)
+//A linha abaixo equivale ao LIMIT. take(n) retorna n registros da consulta e skip(n) retorna o conjunto de registros a partir do (n)ésimo registro, sendo n=0 o primeiro registro. 
+->take($rows)->skip(0)
 ->get();
 }
 else{
+  $count = SolicitacaoE::join('cliente as c', 's.id_cliente', '=', 'c.id_cliente')
+->leftjoin( 'motoboy as m', 'm.id_motoboy', '=', 's.id_motoboy')
+->join( 'solicitacao_endereco as seb', 'seb.id_solicitacao_endereco', '=', 's.id_solicitacao_endereco_busca')
+->join( 'solicitacao_endereco as see', 'see.id_solicitacao_endereco', '=', 's.id_solicitacao_endereco_entrega')
+->from('solicitacao as s')
+->where('s.ativo', '=', 1)
+->count();
+
+$rows = $rows==0 ? $count : $rows;
+
   $solicitacoes = SolicitacaoE::join('cliente as c', 's.id_cliente', '=', 'c.id_cliente')
 ->leftjoin( 'motoboy as m', 'm.id_motoboy', '=', 's.id_motoboy')
 ->join( 'solicitacao_endereco as seb', 'seb.id_solicitacao_endereco', '=', 's.id_solicitacao_endereco_busca')
@@ -34,6 +58,8 @@ else{
 'seb.id_solicitacao_endereco as sendbusca_id', 'seb.endereco as enderecoa', 'seb.numero as numeroa', 'seb.bairro as bairroa', 'seb.cidade as cidadea',
 'see.id_solicitacao_endereco as sendentrega_id' , 'see.endereco as enderecob', 'see.numero as numerob', 'see.bairro as bairrob', 'see.cidade as cidadeb', 's.valor as valor', 's.data')
 ->where('s.ativo', '=', 1)
+//A linha abaixo equivale ao LIMIT. take(n) retorna n registros da consulta e skip(n) retorna o enésimo conjunto de registros, sendo n=0 o primeiro conjunto.
+->take($rows)->skip(0)
 ->get();
 }
 
@@ -73,9 +99,9 @@ $clientes = ClienteE::from('cliente')
                               <br />
                               <section>
 
-                                      <form class="form-horizontal col-md-4" id="filtroCliente" name="filtroCliente" method="POST">
+                                      <form class="form-horizontal col-md-7" id="filtroCliente" name="filtroCliente" method="POST">
                                         <div class="form-group">
-                                            <div class="col-md-7" style="margin-bottom: 10px">
+                                            <div class="col-md-4" style="margin-bottom: 5px">
                                                 <select name="cliente" class="form-control" >
 													<option value="0">Selecione o cliente</option>
 													<?php foreach ($clientes as $key => $objcliente){ ?>
@@ -83,7 +109,7 @@ $clientes = ClienteE::from('cliente')
 													<?php } ?>
 												</select>
                                             </div>
-											<div class="col-md-7" style="margin-bottom: 10px">
+											<div class="col-md-4" style="margin-bottom: 5px">
 												<select name="mes" class="form-control" >
 													<option value="0">Selecione o mês</option>
 													<option value="1">janeiro</option>
@@ -100,7 +126,14 @@ $clientes = ClienteE::from('cliente')
 													<option value="12">dezembro</option>
 												</select>
 											</div>
-											<div class="col-md-7" style="margin-bottom: 10px">
+											<div class="col-md-2">
+                                                <select name="rows" id="filtroRows" class="form-control form-search">
+                                                    <option value="10" selected="">10</option>
+                                                    <option value="30">30</option>
+                                                    <option value="0">Todos</option>
+                                                </select>
+                                            </div>
+											<div class="col-md-1" style="margin-bottom: 10px">
 												<input type="submit" name="btnmesok" class="animate btn btn-default" id="btnmesok" value="Ok"/>                                                                 
                       </div>
                                         </div>
@@ -152,6 +185,8 @@ $clientes = ClienteE::from('cliente')
 											?>														
                                         </tbody>
                                     </table>
+									<div id="pagination-relcliente" class="list-inline">
+									</div>
 
 
                                 </section>
