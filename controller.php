@@ -58,15 +58,12 @@ try {
             $validacao.= $basic[rand(0, strlen($basic) - 1)];
         }
  
-        $objCliente->cod_verificacao = $validacao;
+        $_POST['cliente']["cod_verificacao"] = $validacao;
 
         $objCliente->Prepare($_POST['cliente']);
         if (!$_POST['cliente']['id_cliente']) {
             $objCliente->Cadastra();
 
-            $_SESSION['site'][_EMPRESA_]['cliente']["id_cliente"] = $objCliente->id_cliente;
-            $_SESSION['site'][_EMPRESA_]['cliente']["nome"] = $objCliente->nome;
-            $_SESSION['site'][_EMPRESA_]['cliente']["email"] = $objCliente->email;
 
 
             $content = http_build_query(array(
@@ -88,8 +85,9 @@ try {
             $objCliente->Edita();
         }
 
-        //echo 'O cadastro foi salvo com sucesso.';
-        echo '<script language= "JavaScript">location.href="' . GLOBAL_PATH . 'busca"</script>';
+        echo 'Seu cadastro foi salvo com sucesso. Acesse seu email para efetuar a ativação.';
+        //echo '<script language= "JavaScript">location.href="' . GLOBAL_PATH . 'busca"</script>';
+		echo '<br/><a href="' . GLOBAL_PATH . '">Voltar</a>';
         die;
     }
     

@@ -1,20 +1,27 @@
 <?php
 require "site/vendor/autoload.php";
 require "site/config/database.php";
+include_once('inc_config.php');
 //session_start();
 ob_start();
 ini_set( 'display_errors', 0 );
 
 if ($_GET['cod'] != '') {
 	$cod =  $_GET['cod'];
-	$cliente = ClienteE::where('cod_verificacao', '=', $cod)->get();
+	$clientev = ClienteE::where('cod_verificacao', '=', $cod)->get();
+	foreach ($clientev as $key => $obj) {
+		$id_cliente = $obj->id_cliente;
+	}
+	$cliente = ClienteE::find($id_cliente);
 	if($cliente->id_cliente != null){
 		$cliente->ativo = 1;
 		$cliente->save();
-		echo "Sua conta foi ativada";
+		echo "Sua conta foi ativada. Efetue login para acessar a área do cliente.";
+		echo '<br/><a href="' . GLOBAL_PATH . '">Ir para a Home</a>';
 	}
 	else{
 		echo "Erro no código de verificacao";
+		echo '<br/><a href="' . GLOBAL_PATH . '">Voltar</a>';
 	}
 
 }
@@ -23,7 +30,7 @@ else if(($_POST['email'] != '') and ($_POST['nome'] != '')){
 	$nome =  $_POST['nome'];
 	$email =  $_POST['email'];
 	$cod =  $_POST['cod'];
-	$link = 'www.appmobi.in/sites/proattitude/ativacao.php?cod=' . $cod;
+	$link = GLOBAL_PATH . 'ativacao.php?cod=' . $cod;
 	$corpo = '';
 	$emailsender = 'CONTATO@PROATTITUDESERVICOS.COM.BR';
 	$to = $email;
