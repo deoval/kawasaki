@@ -4,6 +4,7 @@ session_start();
 include_once("inc_config.php");
 require "site/vendor/autoload.php";
 require "site/config/database.php";
+require_once("_class/entidade/SqlMotoboy.php");
 
 try {
 
@@ -94,6 +95,23 @@ try {
     if (isset($_POST['cmd']) && $_POST['cmd'] == 'salvarMotoboy') {
         
 
+		$target_dir_foto = "uploads/foto_motoboy/";
+		$target_file_foto = $target_dir_foto . basename($_FILES["foto"]["name"]);
+		$uploadOk_foto = 1;
+		$imageFileType_foto = pathinfo($target_file_foto,PATHINFO_EXTENSION);
+		// Check if image file is a actual image or fake image
+		$checkimage_foto = getimagesize($_FILES["foto"]["tmp_name"]);
+		
+		
+		$target_dir_cnh = "uploads/copia_cnh/";
+		$target_file_cnh = $target_dir_cnh . basename($_FILES["cnh"]["name"]);
+		$uploadOk_cnh = 1;
+		$imageFileType_cnh = pathinfo($target_file_cnh,PATHINFO_EXTENSION);
+		// Check if image file is a actual image or fake image
+		$checkimage_cnh = getimagesize($_FILES["cnh"]["tmp_name"]);
+
+
+
         if (!$_POST['motoboy']['id_motoboy'] && !$_POST['motoboy']['termos']) {
             throw new Exception('Você precisa aceitar os termos!');
         }
@@ -124,11 +142,34 @@ try {
 
         $senhaBkp = $_POST['motoboy']["senha"] != "" ? md5($_POST['motoboy']["senha"]) : $objMotoboy->senha;
         $_POST['motoboy']["senha"] = $senhaBkp;
-
+		
+		$_POST['motoboy']["imagem"] = $_FILES["foto"]["name"];
+		$_POST['motoboy']["copia_cnh"] = $_FILES["cnh"]["name"];
+		
         $objMotoboy->Prepare($_POST['motoboy']);
 
         if (!$_POST['motoboy']['id_motoboy']) {
-            $objMotoboy->Cadastra();
+
+			if($checkimage_foto !== false) {
+				//echo "File is an image - " . $checkimage["mime"] . ".";
+				$uploadOk_foto = 1;
+				move_uploaded_file($_FILES["foto"]["tmp_name"], $target_file_foto);
+			} 
+			else {
+				throw new Exception("O arquivo escolhido para foto não é uma imagem válida.");
+				$uploadOk_foto = 0;
+			}
+			if($checkimage_cnh !== false) {
+				//echo "File is an image - " . $checkimage_cnh["mime"] . ".";
+				$uploadOk_cnh = 1;
+				move_uploaded_file($_FILES["cnh"]["tmp_name"], $target_file_cnh);
+			} 
+			else {
+				throw new Exception("O arquivo escolhido para cópia de CNH não é uma imagem válida.");
+				$uploadOk_cnh = 0;
+			}
+			
+			$objMotoboy->Cadastra();
         } else {
             $objMotoboy->Edita();
         }

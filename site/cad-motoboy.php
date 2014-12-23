@@ -1,7 +1,7 @@
 <?php
 include_once('./site/inc/header.php');
 ?>
-<main id="cad-cliente">
+<main id="cad-motoboy">
 
     <div class="bannerHome">
         <img src="<?php echo GLOBAL_PATH; ?>_assets/img/bannerhome.jpg" alt="">
@@ -18,7 +18,7 @@ include_once('./site/inc/header.php');
         <h2>
             PREENCHA OS CAMPOS ABAIXO PARA SE CADASTRAR
         </h2>
-    <form action="<?php echo GLOBAL_PATH; ?>controller.php" name="fMotoboy" id="fMotoboy" method="post">
+    <form action="<?php echo GLOBAL_PATH; ?>controller.php" name="fMotoboy" id="fMotoboy" method="post" enctype="multipart/form-data">
         <table class="content" style="width: 600px;position: relative;margin: 30px auto;">
             <tr>            
                 <td colspan="2">             
@@ -101,13 +101,15 @@ include_once('./site/inc/header.php');
                 </td>
             </tr>
             <tr>           
-                <td colspan="2">               
-                    <input type="file" name="motoboy[imagem]" placeholder="Foto:"/>
+                <td colspan="2">   
+					Foto:
+                    <input type="file" name="foto" placeholder="Foto:"/>
                 </td>
             </tr>
             <tr>           
-                <td colspan="2">                
-                    <input type="file" name="motoboy[copia_cnh]" placeholder="Copia da CNH:"/>
+                <td colspan="2" >
+					Cópia da CNH:
+                    <input type="file" name="cnh" placeholder="Copia da CNH:"/>
                 </td>
             </tr>
             <tr>
