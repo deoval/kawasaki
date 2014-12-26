@@ -18,7 +18,8 @@ $cmd =isset($_POST['cmd']) ? $_POST['cmd'] : "";
         <link rel="stylesheet" href="<?php echo GLOBAL_PATH; ?>_assets/css/main.css" />
 		<link rel="stylesheet" href="<?php echo GLOBAL_PATH; ?>_assets/css/bootstrap.css" />
         <script src="<?php echo GLOBAL_PATH; ?>bower_components/modernizr/modernizr.js"></script>
-		  
+		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="<?php echo GLOBAL_PATH; ?>_assets/js/bootstrap.js" type="text/javascript"></script>  
 		
     </head> 
     <body>
