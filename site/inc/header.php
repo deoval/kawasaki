@@ -4,6 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Pro Attitude</title>
+		<link rel="stylesheet" href="<?php echo GLOBAL_PATH; ?>_assets/css/bootstrap.css" />		
         <link rel="stylesheet" href="<?php echo GLOBAL_PATH; ?>_assets/css/main.css" />
         <script src="<?php echo GLOBAL_PATH; ?>bower_components/modernizr/modernizr.js"></script>
     </head>
@@ -33,15 +34,16 @@
                         <div class="clear"></div>
                         <span class="tel"></span> <p>(11) 2872-0062</p>
                         <span class="mail"></span> <a href="mailto:contato@proattitudeservicos.com.br">CONTATO@PROATTITUDESERVICOS.COM.BR</a>
-                   		<p class="cadastre">Ainda não é cadastrado?</p> <p class="cadastre">Cadastre-se agora como <a class="cadastre" href="<?php echo GLOBAL_PATH; ?>cad-cliente">Cliente</a> ou <a class="cadastre" href="<?php echo GLOBAL_PATH; ?>cad-motoboy">Motoboy</a></p>
+                   		<p class="cadastre">Ainda não é cadastrado?</p> <p class="cadastre">Cadastre-se agora como <a class="cadastre" href="?p=cadcliente#cadcliente">Cliente</a> ou <a class="cadastre" href="?p=cadmotoboy#cadmotoboy">Motoboy</a></p>
                     </div>
                 </section>
                 <section class="bottom-bar-section">
                     <ul class="left">
                         <li><a href="<?php echo GLOBAL_PATH; ?>" class="ativo">HOME</a></li>
-                        <li><a href="#">EMPRESA</a></li>
-                        <li><a href="#">SERVIÇOS</a></li>
-                        <li><a href="#">CLIENTES</a></li>
+                        <li><a href="?p=empresa">EMPRESA</a></li>
+                        <li><a href="?p=servicos">SERVIÇOS</a></li>
+                        <li><a href="#clientes">CLIENTES</a></li>
+						<li><a href="#contato">CONTATO</a></li>
                     </ul>
                 </section>
             </div>

@@ -3,37 +3,93 @@
 	
 	$objconfig = new Config();
 	$destinatario = $objconfig->_lista(array(  item =>  "item = 'destinatario_contato_home'"),"","")[0]['value'];
+	
+	$pagina = isset($urlGet['p']) ? $urlGet['p'] : "";
+		
+	
  ?>
         <main id="home">
 
             <div class="bannerHome">
                 <img src="<?php echo GLOBAL_PATH; ?>_assets/img/bannerhome.jpg" alt="">
             </div>
-
-            <div class="clear"></div>
-            <section class="conteudo wrapper">
+				<?php
+				if ($pagina == "servicos")
+				{
+					$objinstitucional = new Institucional();
+					$servicos = $objinstitucional->_lista(array(  id_institucional =>  "id_institucional = '2'"),"","")[0];
+				?>
+				<div class="clear" id="servicos"></div>
+				<section class="conteudo wrapper">
 
                 <hr /> 
 
                 <p class="header">
-                    Confira nossos principais serviços.
+                    <?php echo $servicos['titulo']; ?>
                 </p>
 
                 <h2>
-                    A MANEIRA MAIS RÁPIDA E ECONÔMICA DE FAZER SUAS ENTREGAS E RETIRADAS.
+					<?php echo $servicos['subtitulo']; ?>
                 </h2>
 
                 <article class="noticias" style="background:url(<?php echo GLOBAL_PATH; ?>_assets/img/noticiaHome.jpg) no-repeat center top">
                     <div class="inner">
-                        <h3>Serviços de Emergência</h3>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio assumenda ratione tempora, necessitatibus minus itaque magnam ut quis maiores. Laudantium enim eos ad dolore fugit itaque recusandae, quia doloribus placeat!
+                            <?php echo $servicos['texto']; ?>
                         </p>
-                        <a href="javascript:void(0);">SAIBA MAIS</a>
+                        
                     </div>
                 </article>
+				<?php 
+				}
+				else if ($pagina=="cadcliente")
+				{
+					echo '<div class="clear" ></div>';
+					echo '<section class="conteudo wrapper" id="cadcliente">';
 
-                <ul class="bxslider">
+					include('cad-cliente.php');
+				}
+				else if ($pagina=="cadmotoboy")
+				{
+					echo '<div class="clear" ></div>';
+					echo '<section class="conteudo wrapper" id="cadmotoboy">';
+					include('cad-motoboy.php');
+				}
+				else{
+					$objinstitucional = new Institucional();
+					$empresa = $objinstitucional->_lista(array(  id_institucional =>  "id_institucional = '1'"),"","")[0];
+				?>
+				<div class="clear" id="servicos"></div>
+				<section class="conteudo wrapper">
+
+                <hr /> 
+
+                <p class="header">
+                    <?php echo $empresa['titulo']; ?>
+                </p>
+
+                <h2>
+					<?php echo $empresa['subtitulo']; ?>
+                </h2>
+
+                <article class="noticias" style="background:url(<?php echo GLOBAL_PATH; ?>_assets/img/noticiaHome.jpg) no-repeat center top">
+                    <div class="inner">
+                        <p>
+                            <?php echo $empresa['texto']; ?>
+                        </p>
+                        
+                    </div>
+                </article>
+				<?php
+				}
+				?>
+				
+				
+				<div class="clear" id="clientes"></div>
+				<h2>
+                    Clientes
+                <h2>
+                <ul class="bxslider" >
                   <li><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider1.jpg" /></li>
                   <li><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider2.jpg" /></li>
                   <li><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider3.jpg" /></li>
@@ -43,15 +99,11 @@
                   <li><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider3.jpg" /></li>
                 </ul>
 
-            <div class="clear"></div>
-            <div class="contato">
+            <div class="clear" ></div>
+            <div class="contato" id="contato">
                 <hr />
+
                 <div>
-                    <h4>CHAT ONLINE</h4>
-                    <span class="separator"></span>
-                    <p>
-                        Fale conosco através de nosso chat
-                    </p>
                     <h4>ENTRE EM CONTATO</h4>
                     <span class="separator"></span>
                     <form action="<?php echo GLOBAL_PATH; ?>_assets/ajax/contato.php" id="formContato" >

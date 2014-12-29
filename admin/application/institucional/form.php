@@ -54,7 +54,7 @@ $objInstitucional = new SqlInstitucional($id_institucional);
                                             </div> <!-- /controls -->				
                                         </div> <!-- /control-group -->
 
-                                        <?php /*?>
+
                                         <div class="form-group">											
                                             <label for="subtitulo" class="col-md-4">SubTitulo</label>
                                             <div class="col-md-8">
@@ -62,7 +62,7 @@ $objInstitucional = new SqlInstitucional($id_institucional);
                                                 <p class="help-block"></p>
                                             </div> <!-- /controls -->				
                                         </div> <!-- /control-group -->
-                                         <?php */?>
+                                         
 
                                         <div class="form-group">											
                                             <label for="texto" class="col-md-4">Texto</label>

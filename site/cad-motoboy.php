@@ -1,14 +1,4 @@
-<?php
-include_once('./site/inc/header.php');
-?>
-<main id="cad-motoboy">
 
-    <div class="bannerHome">
-        <img src="<?php echo GLOBAL_PATH; ?>_assets/img/bannerhome.jpg" alt="">
-    </div>
-
-    <div class="clear"></div>
-    <section class="conteudo wrapper">
         <hr /> 
 
         <p class="header">
@@ -125,9 +115,3 @@ include_once('./site/inc/header.php');
             </tr>
         </table>
      </form>
-    <section>
-</main>
-
-<?php
-include_once('./site/inc/footer.php');
-?>
