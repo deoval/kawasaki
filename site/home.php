@@ -19,8 +19,8 @@
 					$objinstitucional = new Institucional();
 					$servicos = $objinstitucional->_lista(array(  id_institucional =>  "id_institucional = '2'"),"","")[0];
 				?>
-				<div class="clear" id="servicos"></div>
-				<section class="conteudo wrapper">
+				<div class="clear" ></div>
+				<section class="conteudo wrapper" id="servicos">
 
                 <hr /> 
 
@@ -59,8 +59,8 @@
 					$objinstitucional = new Institucional();
 					$empresa = $objinstitucional->_lista(array(  id_institucional =>  "id_institucional = '1'"),"","")[0];
 				?>
-				<div class="clear" id="servicos"></div>
-				<section class="conteudo wrapper">
+				<div class="clear" ></div>
+				<section class="conteudo wrapper" id="empresa">
 
                 <hr /> 
 
@@ -84,11 +84,14 @@
 				}
 				?>
 				
-				
-				<div class="clear" id="clientes"></div>
-				<h2>
+				</section>
+				<div class="clear" ></div>
+				 
+				<section class="conteudo wrapper" id="clientes">
+				<hr /> 
+				<p class="header">
                     Clientes
-                <h2>
+                </p>
                 <ul class="bxslider" >
                   <li><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider1.jpg" /></li>
                   <li><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider2.jpg" /></li>
@@ -98,11 +101,14 @@
                   <li><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider2.jpg" /></li>
                   <li><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider3.jpg" /></li>
                 </ul>
-
+			</section>
             <div class="clear" ></div>
-            <div class="contato" id="contato">
-                <hr />
-
+			<section class="conteudo wrapper" id="contato">
+			<hr />
+			<p class="header">
+                Contato
+            </p>
+            <div class="contato" >
                 <div>
                     <h4>ENTRE EM CONTATO</h4>
                     <span class="separator"></span>
