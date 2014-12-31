@@ -9,7 +9,7 @@
             PREENCHA OS CAMPOS ABAIXO PARA SE CADASTRAR
         </h2>
     <form action="<?php echo GLOBAL_PATH; ?>controller.php" name="fMotoboy" id="fMotoboy" method="post" enctype="multipart/form-data">
-        <table class="content" style="width: 600px;position: relative;margin: 30px auto;">
+        <table class="content" style="width: 90%;position: relative;margin: 30px auto;">
             <tr>            
                 <td colspan="2">             
                     <input type="text" name="motoboy[nome]" placeholder="Nome:"/>
