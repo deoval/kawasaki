@@ -35,7 +35,7 @@
                 <article class="noticias" style="background:url(<?php echo GLOBAL_PATH; ?>_assets/img/noticiaHome.jpg) no-repeat center top">
                     <div class="inner">
                         <p>
-                            <?php echo $servicos['texto']; ?>
+                            <?php echo nl2br($servicos['texto']); ?>
                         </p>
                         
                     </div>
@@ -75,7 +75,7 @@
                 <article class="noticias" style="background:url(<?php echo GLOBAL_PATH; ?>_assets/img/noticiaHome.jpg) no-repeat center top">
                     <div class="inner">
                         <p>
-                            <?php echo $empresa['texto']; ?>
+                            <?php echo nl2br($empresa['texto']); ?>
                         </p>
                         
                     </div>
