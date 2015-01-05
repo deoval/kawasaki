@@ -44,7 +44,7 @@ function logar() {
             if (data.fabrica == 1) {
                 document.location.href = 'application/pedido/main.php';
             } else {
-                document.location.href = 'application/dashboard/main.php';
+                document.location.href = 'application/solicitacao/alocar.php';
             }
         }
     });
