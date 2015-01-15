@@ -20,7 +20,7 @@ if ($id_cliente != 0 ) {
 ->select('c.nome as cliente', 's.id_solicitacao as id', 'm.nome as motoboy',
 'seb.id_solicitacao_endereco as sendbusca_id', 'seb.endereco as enderecoa', 'seb.numero as numeroa', 'seb.bairro as bairroa', 'seb.cidade as cidadea',
 'see.id_solicitacao_endereco as sendentrega_id' , 'see.endereco as enderecob', 'see.numero as numerob', 'see.bairro as bairrob', 'see.cidade as cidadeb', 's.valor as valor', 's.data')
-->where('s.ativo', '=', 1)
+//->where('s.ativo', '=', 1)
 ->where('c.id_cliente', '=', $id_cliente)
 ->get();
 }
@@ -33,7 +33,7 @@ else{
 ->select('c.nome as cliente', 's.id_solicitacao as id', 'm.nome as motoboy',
 'seb.id_solicitacao_endereco as sendbusca_id', 'seb.endereco as enderecoa', 'seb.numero as numeroa', 'seb.bairro as bairroa', 'seb.cidade as cidadea',
 'see.id_solicitacao_endereco as sendentrega_id' , 'see.endereco as enderecob', 'see.numero as numerob', 'see.bairro as bairrob', 'see.cidade as cidadeb', 's.valor as valor', 's.data')
-->where('s.ativo', '=', 1)
+//->where('s.ativo', '=', 1)
 ->get();
 }
 
