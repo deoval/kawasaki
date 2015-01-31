@@ -34,9 +34,9 @@
 
                 <article class="noticias" style="background:url(<?php echo GLOBAL_PATH; ?>_assets/img/noticiaHome.jpg) no-repeat center top">
                     <div class="inner">
-                        <p>
+                        
                             <?php echo nl2br($servicos['texto']); ?>
-                        </p>
+                        
                         
                     </div>
                 </article>
@@ -74,9 +74,9 @@
 
                 <article class="noticias" style="background:url(<?php echo GLOBAL_PATH; ?>_assets/img/noticiaHome.jpg) no-repeat center top">
                     <div class="inner">
-                        <p>
+                        
                             <?php echo nl2br($empresa['texto']); ?>
-                        </p>
+                        
                         
                     </div>
                 </article>
@@ -93,13 +93,20 @@
                     Clientes
                 </p>
                 <ul class="bxslider" >
-                  <li><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider1.jpg" /></li>
-                  <li><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider2.jpg" /></li>
-                  <li><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider3.jpg" /></li>
-                  <li><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider4.jpg" /></li>
-                  <li><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider1.jpg" /></li>
-                  <li><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider2.jpg" /></li>
-                  <li><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider3.jpg" /></li>
+                  <li><a href="http://www.chinainbox.com.br/" target="_blank"><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider1.jpg" /></a></li>
+                  <li><a href="http://www.asiaexpress.com.br/" target="_blank"><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider2.jpg" /></a></li>
+                  <li><a href="http://www.osgauleses.com.br/" target="_blank"><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider3.jpg" /></a></li>
+                  <li><a href="http://lightesaude.com.br/" target="_blank"><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider4.jpg" /></a></li>
+                  <li><a href="http://restaurantebomdeminas.com.br/" target="_blank"><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider5.jpg" /></a></li>
+                  <li><a href="http://www.lanchesstopdog.com.br/" target="_blank"><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider6.jpg" /></a></li>
+                  <li><a href="http://sandubaochic.com.br/" target="_blank"><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider7.jpg" /></a></li>
+                  <li><a href="http://www.burguerx.com.br/" target="_blank"><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider8.jpg" /></a></li>
+                  <li><a href="http://www.superpizzapan.com.br/" target="_blank"><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider9.jpg" /></a></li>
+                  <li><a href="http://www.pizzeriacezanne.com.br/" target="_blank"><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider10.jpg" /></a></li>
+                  <li><a href="http://www.pizzabros.com.br/" target="_blank"><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider11.jpg" /></a></li>
+                  <li><a href="http://farmaciasaintgermain.com.br/" target="_blank"><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider12.jpg" /></a></li>				  
+                  <li><a href="http://www.dacasadaclara.com.br/" target="_blank"><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider13.jpg" /></a></li>
+                  <li><a href="http://mexicasfest.com.br/" target="_blank"><img src="<?php echo GLOBAL_PATH; ?>_assets/img/slider14.jpg" /></a></li>
                 </ul>
 			</section>
             <div class="clear" ></div>
